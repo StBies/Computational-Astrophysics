@@ -11,7 +11,7 @@
 /**
  * Default constructor. Initializes an empty square matrix of size 2.
  *
- * @author Stefan Bieschke
+ * @author Stefan
  * @date Nov. 7, 2015
  */
 Matrix::Matrix()
@@ -23,10 +23,10 @@ Matrix::Matrix()
 /**
  * Constructor. Builds a new Matrix of given size and containing a matrix given a twodimensional array.
  *
- * @author Stefan Bieschke
+ * @author Stefan
  * @date Nov. 7, 2015
  *
- * @param size The size of the matrix. Must correspont with the size of the 2D square array matrix.
+ * @param size The size of the matrix. Must correspond with the size of the 2D square array matrix.
  * @param matrix The 2D square array you want the Matrix to contain.
  */
 Matrix::Matrix(int size, int** matrix)
@@ -38,7 +38,7 @@ Matrix::Matrix(int size, int** matrix)
 /**
  * Clears the heap from this matrix.
  *
- * @author Stefan Bieschke
+ * @author Stefan
  * @date Nov. 7, 2015
  */
 Matrix::~Matrix()
@@ -50,7 +50,7 @@ Matrix::~Matrix()
 /**
  * Sets the size of the matrix
  *
- * @author Stefan Bieschke
+ * @author Stefan
  * @date Nov. 7, 2015
  *
  * @param size The new size of the matrix. Matrix itself is not affected.
@@ -63,7 +63,7 @@ void Matrix::setSize(int size)
 /**
  * Sets a specific value of the matrix.
  *
- * @author Stefan Bieschke
+ * @author Stefan
  * @date Nov. 7, 2015
  *
  * @param value The value, that is to be set
@@ -83,7 +83,7 @@ void Matrix::setValue(int value, int i, int j)
 /**
  * Read the size of the square matrix
  *
- * @author Stefan Bieschke
+ * @author Stefan
  * @date Nov. 7, 2015
  *
  * @return The size of the matrix.
@@ -96,7 +96,7 @@ int Matrix::getSize()
 /**
  * Returns the matrix as a double pointer array of integers.
  *
- * @author Stefan Bieschke
+ * @author Stefan
  * @date Nov. 7, 2015
  *
  * @return an array of pointers to integer-arrays containing the matrix.
@@ -109,7 +109,7 @@ int** Matrix::getMatrix()
 /**
  * Returns the integer value of the matrix at position row, column
  *
- * @author Stefan Bieschke
+ * @author Stefan
  * @date Nov. 7, 2015
  *
  * @param i The row, that you want the value in
@@ -145,7 +145,7 @@ int Matrix::getValue(int i, int j)
  * Setup the matrix to contain a given twodimensional array. Better use the corresponding constructor to build a new
  * Matrix-object to avoid confusion.
  *
- * @author Stefan Bieschke
+ * @author Stefan
  * @date Nov. 7, 2015
  *
  * @param size The size of the twodimensional square array
@@ -175,7 +175,7 @@ int** Matrix::initMatrix(int size)
  * The calling Matrix object is the left hand side operand of the multiplication.
  * Works for square matrices only.
  *
- * @author Stefan Bieschke
+ * @author Stefan
  * @date Nov. 7, 2015
  *
  * @param matrix The matrix at the right side of the multiplication.
