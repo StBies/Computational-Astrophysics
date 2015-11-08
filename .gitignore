@@ -1,14 +1,14 @@
 # Documentation
-./Problemset1/Exercise2/doc/
+Problemset1/Exercise2/doc/
 
 # Backupfiles
 *.*~
--/Exercise*/*.*
+Exercise*/*.*
 
 #Binaries
-./Problemset1/Exercise*/bin/
-./Problemset1/Exercise*/Debug/
-./Problemset1/Exercise*/obj/
+Problemset1/Exercise*/bin/
+Problemset1/Exercise*/Debug/
+Problemset1/Exercise*/obj/
 
 #Data for Set1/Exercise1
-./Exercise1/*.dat
+Exercise1/*.dat

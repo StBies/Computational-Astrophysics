@@ -66,7 +66,6 @@ void Matrix::setSize(int size)
 
 /**
  * Sets a specific value of the matrix. If your indices are greater than the matrixes' size, nothing will be done.
- * TODO: Implement exceptionhandling
  *
  * @author Stefan
  * @date Nov. 7, 2015
@@ -78,6 +77,7 @@ void Matrix::setSize(int size)
  */
 void Matrix::setValue(int value, int i, int j)
 {
+//	TODO: Implement exceptionhandling
 	if (i < _size && j < _size)
 	{
 		_matrix[i][j] = value;
@@ -118,7 +118,6 @@ int** Matrix::getMatrix()
  * @author Stefan
  * @date Nov. 7, 2015
  * @version 0.1
- * TODO Redo exceptionhandling, maybe throw to caller.
  *
  * @param i The row, that you want the value in
  * @param j The column, that you want the value in
@@ -127,6 +126,7 @@ int** Matrix::getMatrix()
  */
 int Matrix::getValue(int i, int j)
 {
+//	TODO Redo exceptionhandling, maybe throw to caller.
 	try
 	{
 		if (i < _size && j < _size)
@@ -166,9 +166,14 @@ void Matrix::setMatrix(int size, int** matrix)
 	_matrix = matrix;
 }
 
+/**
+ * Build a new, empty 2D square array doublepointer of a given size. Private method.
+ *
+ * @param size The size of the empty, square 2D array.
+ */
 int** Matrix::initMatrix(int size)
 {
-	int ** result = new int*[size];
+	int** result = new int*[size];
 
 	for (int i = 0; i < size; i++)
 	{
@@ -201,6 +206,21 @@ Matrix* Matrix::multiply(Matrix& matrix)
 		result = initMatrix(_size);
 	}
 
+	int stepresult = 0;
+	for(int i = 0; i < _size; i++)
+	{
+		for(int j = 0; j < _size; j++)
+		{
+			for(int k = 0; k < _size; k++)
+			{
+
+				stepresult += _matrix[i][k] * matrix[k][j];
+			}
+			result[i][j] = stepresult;
+			stepresult = 0;
+		}
+	}
+
 	return new Matrix(_size, result);
 }
 
@@ -216,7 +236,6 @@ Matrix* Matrix::multiply(Matrix& matrix)
  * @param row The row, you want to be returned.
  *
  * @return Pointer to an array of ints, that you can use the [] operator on again to get the value you want.
- *
  */
 int* Matrix::operator[](int row)
 {

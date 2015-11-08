@@ -8,7 +8,7 @@ void fill(int size, int** a, int** b);
 
 int main()
 {
-	int size = 100;
+	int size = 2;
 	int** a;
 	int** b;
 
@@ -23,9 +23,12 @@ int main()
 
 	fill(size,a,b);
 
-	Matrix& A = *new Matrix(size,a);
+	Matrix* A = new Matrix(size,a);
+	Matrix* B = new Matrix(size,b);
+	Matrix* C = A->multiply(*B);
 
-	cout << A[1][2] << endl;
+	cout << *C[1][1] << endl;
+
 
 	return 0;
 }
