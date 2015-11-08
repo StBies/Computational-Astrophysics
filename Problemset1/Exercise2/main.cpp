@@ -10,7 +10,7 @@ int** multiply(int size, int** a, int** b);
 
 int main()
 {
-	int size = 2;
+	int size = 200;
 	int** a;
 	int** b;
 	int** c;
@@ -28,13 +28,11 @@ int main()
 
 	fill(size, a, b);
 
-	Matrix* A = new Matrix(size, a);
-	Matrix* B = new Matrix(size, b);
-	Matrix* C = A->multiply(*B);
+//	Matrix* A = new Matrix(size, a);
+//	Matrix* B = new Matrix(size, b);
+//	Matrix* C = A->multiply(*B);
 
 	c = multiply(size,a,b);
-
-	cout << c[1][1] << endl;
 
 	return 0;
 }
@@ -71,11 +69,16 @@ int** multiply(int size, int** a, int** b)
 		result[i] = new int[size];
 	}
 
+	double startTime;
+	double endTime;
+	startTime = omp_get_wtime();
 	int stepresult = 0;
+
 	for (int i = 0; i < size; i++)
 	{
 		for (int j = 0; j < size; j++)
 		{
+
 			for (int k = 0; k < size; k++)
 			{
 
@@ -85,6 +88,9 @@ int** multiply(int size, int** a, int** b)
 			stepresult = 0;
 		}
 	}
+	endTime = omp_get_wtime();
+
+	cout << 1000 * (endTime - startTime) << endl;
 
 	return result;
 }
