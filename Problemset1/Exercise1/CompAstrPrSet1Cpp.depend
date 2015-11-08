@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1446803509 source:/home/bieschke/workspace/codeblocks/CompAstrPrSet1Cpp/main.cpp
+	<iostream>
+	<ctime>
+	<omp.h>
+

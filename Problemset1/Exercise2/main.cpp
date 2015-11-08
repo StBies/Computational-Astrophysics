@@ -25,7 +25,7 @@ int main()
 
 	Matrix& A = *new Matrix(size,a);
 
-	cout << A[0][0] << endl;
+	cout << A[1][2] << endl;
 
 	return 0;
 }

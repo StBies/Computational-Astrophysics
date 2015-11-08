@@ -13,6 +13,7 @@
  *
  * @author Stefan
  * @date Nov. 7, 2015
+ * @version 0.1
  */
 Matrix::Matrix()
 {
@@ -25,6 +26,7 @@ Matrix::Matrix()
  *
  * @author Stefan
  * @date Nov. 7, 2015
+ * @version 0.1
  *
  * @param size The size of the matrix. Must correspond with the size of the 2D square array matrix.
  * @param matrix The 2D square array you want the Matrix to contain.
@@ -40,6 +42,7 @@ Matrix::Matrix(int size, int** matrix)
  *
  * @author Stefan
  * @date Nov. 7, 2015
+ * @version 0.1
  */
 Matrix::~Matrix()
 {
@@ -48,10 +51,11 @@ Matrix::~Matrix()
 }
 
 /**
- * Sets the size of the matrix
+ * Sets the size of the matrix. Does not affect the matrix itself. Handle with care!
  *
  * @author Stefan
  * @date Nov. 7, 2015
+ * @version 0.1
  *
  * @param size The new size of the matrix. Matrix itself is not affected.
  */
@@ -61,16 +65,16 @@ void Matrix::setSize(int size)
 }
 
 /**
- * Sets a specific value of the matrix.
+ * Sets a specific value of the matrix. If your indices are greater than the matrixes' size, nothing will be done.
+ * TODO: Implement exceptionhandling
  *
  * @author Stefan
  * @date Nov. 7, 2015
+ * @version 0.1
  *
  * @param value The value, that is to be set
  * @param i The row at which the value is to be set
  * @param j The column at which the value is to be set
- *
- * @version 0.1
  */
 void Matrix::setValue(int value, int i, int j)
 {
@@ -85,6 +89,7 @@ void Matrix::setValue(int value, int i, int j)
  *
  * @author Stefan
  * @date Nov. 7, 2015
+ * @version 0.1
  *
  * @return The size of the matrix.
  */
@@ -98,6 +103,7 @@ int Matrix::getSize()
  *
  * @author Stefan
  * @date Nov. 7, 2015
+ * @version 0.1
  *
  * @return an array of pointers to integer-arrays containing the matrix.
  */
@@ -111,6 +117,8 @@ int** Matrix::getMatrix()
  *
  * @author Stefan
  * @date Nov. 7, 2015
+ * @version 0.1
+ * TODO Redo exceptionhandling, maybe throw to caller.
  *
  * @param i The row, that you want the value in
  * @param j The column, that you want the value in
@@ -147,6 +155,7 @@ int Matrix::getValue(int i, int j)
  *
  * @author Stefan
  * @date Nov. 7, 2015
+ * @version 0.1
  *
  * @param size The size of the twodimensional square array
  * @param matrix the twodimensional square array, you want the matrix to hold
@@ -177,6 +186,7 @@ int** Matrix::initMatrix(int size)
  *
  * @author Stefan
  * @date Nov. 7, 2015
+ * @version 0.1
  *
  * @param matrix The matrix at the right side of the multiplication.
  *
@@ -194,6 +204,20 @@ Matrix* Matrix::multiply(Matrix& matrix)
 	return new Matrix(_size, result);
 }
 
+/**
+ * Allows, to access the content of the matrix by using the [] operator.
+ * Example: If A is a Matrix type object: A[0][0] is the same as A.getValue(0,0).
+ * Caution! Does not yet work, if A is a pointer to a Matrix. Then, you can still use: *A[i][j]
+ *
+ * @author Stefan
+ * @date Nov. 8, 2015
+ * @version 0.1
+ *
+ * @param row The row, you want to be returned.
+ *
+ * @return Pointer to an array of ints, that you can use the [] operator on again to get the value you want.
+ *
+ */
 int* Matrix::operator[](int row)
 {
 	return _matrix[row];
