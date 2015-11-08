@@ -5,4 +5,10 @@
 *.*~
 -/Exercise*/*.*
 
+#Binaries
+./Problemset1/Exercise*/bin/
+./Problemset1/Exercise*/Debug/
+./Problemset1/Exercise*/obj/
 
+#Data for Set1/Exercise1
+./Exercise1/*.dat
