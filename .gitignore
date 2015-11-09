@@ -15,4 +15,7 @@ Problemset1/Exercise*/Debug/
 Problemset1/Exercise*/obj/
 
 #Data for Set1/Exercise1
-Exercise1/*.dat
+Problemset1/Exercise1/*.dat
+Problemset1/Exercise1/plots/
+Problemset1/Exercise1/opt*
+Problemset1/Exercise1/non*
