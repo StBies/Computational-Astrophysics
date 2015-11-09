@@ -49,6 +49,11 @@ Matrix::Matrix(int size, int** matrix)
  */
 Matrix::~Matrix()
 {
+	for(int i = 0; i < _size; i++)
+	{
+		delete [] _matrix[i];
+		_matrix[i] = nullptr;
+	}
 	delete [] _matrix;
 }
 
