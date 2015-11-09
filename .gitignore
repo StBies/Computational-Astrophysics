@@ -5,6 +5,9 @@ Problemset1/Exercise2/doc/
 *.*~
 Exercise*/*.*
 
+#eclipse-files
+.metadata/
+
 #Binaries
 Problemset1/Exercise*/bin/
 Problemset1/Exercise*/Debug/

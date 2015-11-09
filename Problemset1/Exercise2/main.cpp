@@ -28,11 +28,16 @@ int main()
 
 	fill(size, a, b);
 
-//	Matrix* A = new Matrix(size, a);
-//	Matrix* B = new Matrix(size, b);
-//	Matrix* C = A->multiply(*B);
+	Matrix* A = new Matrix(size, a);
+	Matrix* B = new Matrix(size, b);
+	Matrix* C = A->multiply(*B);
 
-	c = multiply(size,a,b);
+
+	cout << C->getValue(1,1) << endl;
+
+	delete A;
+	delete B;
+	delete C;
 
 	return 0;
 }

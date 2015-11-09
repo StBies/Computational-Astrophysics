@@ -46,8 +46,7 @@ Matrix::Matrix(int size, int** matrix)
  */
 Matrix::~Matrix()
 {
-	delete[] _matrix;
-	delete this;
+	delete _matrix;
 }
 
 /**
@@ -183,7 +182,6 @@ int** Matrix::initMatrix(int size)
 	return result;
 }
 
-
 /**
  * Multiply this Matrix with another Matrix. If the dimensions don't allow multiplication, an exception will be thrown.
  * The calling Matrix object is the left hand side operand of the multiplication.
@@ -199,19 +197,19 @@ int** Matrix::initMatrix(int size)
  */
 Matrix* Matrix::multiply(Matrix& matrix)
 {
-	int** result;
+	int** result = new int*[_size];
 
-	if(matrix.getSize() == _size)
+	for (int i = 0; i < _size; i++)
 	{
-		result = initMatrix(_size);
+		result[i] = new int[_size];
 	}
 
 	int stepresult = 0;
-	for(int i = 0; i < _size; i++)
+	for (int i = 0; i < _size; i++)
 	{
-		for(int j = 0; j < _size; j++)
+		for (int j = 0; j < _size; j++)
 		{
-			for(int k = 0; k < _size; k++)
+			for (int k = 0; k < _size; k++)
 			{
 
 				stepresult += _matrix[i][k] * matrix[k][j];
@@ -239,5 +237,6 @@ Matrix* Matrix::multiply(Matrix& matrix)
  */
 int* Matrix::operator[](int row)
 {
+//	TODO fix it
 	return _matrix[row];
 }
