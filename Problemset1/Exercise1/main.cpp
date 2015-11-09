@@ -1,5 +1,4 @@
 #include <iostream>
-#include <ctime>
 #include <omp.h>
 
 using namespace std;
@@ -7,6 +6,11 @@ using namespace std;
 /**
  *  An application to measure the gain in computationtime by vector optimization and by
  *  multithreading realized with openMP
+ *
+ *  @author Stefan
+ *  @date Nov. 1, 2015
+ *
+ *  @version 0.9
  */
 int main()
 {
@@ -24,23 +28,20 @@ int main()
         b[i] = size - 1 - i;
     }
 
-    //measure starttime: omp_time is a "real" seconds timestamp, clock is accumulated CPU-Clocks over ALL threads
+    //measure starttime: omp_time is a "real" seconds timestamp
     double ompTimeStart = omp_get_wtime();
-    clock_t cl = clock();
 
-    //(parallel) computation of c = a * a
+    //(parallel) computation of c = a * b
     #pragma omp parallel for
     for(int i = 0; i < size; i++)
     {
         c[i] = a[i] * b[i];
     }
     //measure passed time
-    cl = clock() - cl;
-    double runtime = 1000 * (double)cl/ CLOCKS_PER_SEC;
     double ompTime = 1000 *(omp_get_wtime() - ompTimeStart);
 
     //print the result
-    cout << runtime << "\t" << ompTime << endl;
+    cout << ompTime << endl;
 
     //cleanup memory
     delete [] a;

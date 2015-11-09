@@ -7,6 +7,9 @@
 
 #include "Matrix.h"
 #include <iostream>
+#include <omp.h>
+
+using namespace std;
 
 /**
  * Default constructor. Initializes an empty square matrix of size 2.
@@ -46,7 +49,7 @@ Matrix::Matrix(int size, int** matrix)
  */
 Matrix::~Matrix()
 {
-	delete _matrix;
+	delete [] _matrix;
 }
 
 /**
@@ -203,7 +206,10 @@ Matrix* Matrix::multiply(Matrix& matrix)
 	{
 		result[i] = new int[_size];
 	}
+	double startTime = 0;
+	double endTime = 0;
 
+	startTime = omp_get_wtime();
 	int stepresult = 0;
 	for (int i = 0; i < _size; i++)
 	{
@@ -218,6 +224,9 @@ Matrix* Matrix::multiply(Matrix& matrix)
 			stepresult = 0;
 		}
 	}
+	endTime = omp_get_wtime();
+
+	cout << 1000 * (endTime - startTime) << endl;
 
 	return new Matrix(_size, result);
 }
