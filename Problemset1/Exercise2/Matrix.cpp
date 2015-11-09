@@ -220,6 +220,7 @@ Matrix* Matrix::multiply(Matrix& matrix)
 	{
 		for (int j = 0; j < _size; j++)
 		{
+			#pragma omp parallel for
 			for (int k = 0; k < _size; k++)
 			{
 

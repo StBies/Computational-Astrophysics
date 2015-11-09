@@ -3,16 +3,17 @@ Problemset1/Exercise2/doc/
 
 # Backupfiles
 *.*~
-Exercise*/*.*
+Problemset*/Exercise*/*.*~
 
 #eclipse-files
 .metadata/
 RemoteSystemsTempFiles/
 
 #Binaries
-Problemset1/Exercise*/bin/
-Problemset1/Exercise*/Debug/
-Problemset1/Exercise*/obj/
+Problemset*/Exercise*/bin/
+Problemset*/Exercise*/Debug/
+Problemset*/Exercise*/obj/
+Problemset*/Exercise*/*.out
 
 #Data for Set1/Exercise1
 Problemset1/Exercise1/*.dat

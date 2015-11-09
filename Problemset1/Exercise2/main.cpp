@@ -5,7 +5,6 @@
 using namespace std;
 
 void fill(int size, int** a, int** b);
-
 int** multiply(int size, int** a, int** b);
 
 int main()
@@ -32,8 +31,7 @@ int main()
 	Matrix* B = new Matrix(size, b);
 	Matrix* C = A->multiply(*B);
 
-
-	cout << C->getValue(1,1) << endl;
+//	cout << C->getValue(1,1) << endl;
 
 	delete A;
 	delete B;
@@ -42,6 +40,19 @@ int main()
 	return 0;
 }
 
+/**
+ * Fills the values given in the problemset into the given 2D arrays.
+ * Is faster than index checks in the loops.
+ *
+ * @author Stefan
+ * @date Nov. 9, 2015
+ *
+ * @version 0.9
+ *
+ * @param size The size of the arrays to be filled
+ * @param a First 2D array to be filled
+ * @param b Second 2D array to be filled.
+ */
 void fill(int size, int** a, int** b)
 {
 	for (int i = 0; i < size; i++)
@@ -64,6 +75,10 @@ void fill(int size, int** a, int** b)
 	}
 }
 
+/**
+ * Only a backup in case object oriented application didn't work. Consider it
+ * legacy.
+ */
 int** multiply(int size, int** a, int** b)
 {
 	int** result;
@@ -77,13 +92,14 @@ int** multiply(int size, int** a, int** b)
 	double startTime;
 	double endTime;
 	startTime = omp_get_wtime();
+
 	int stepresult = 0;
 
 	for (int i = 0; i < size; i++)
 	{
 		for (int j = 0; j < size; j++)
 		{
-
+			#pragma omp parallel for
 			for (int k = 0; k < size; k++)
 			{
 
