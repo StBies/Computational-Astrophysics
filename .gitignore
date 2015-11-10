@@ -16,7 +16,7 @@ Problemset*/Exercise*/obj/
 Problemset*/Exercise*/*.out
 
 #Data for Set1/Exercise1
-Problemset1/Exercise1/*.dat
+Problemset*/Exercise*/*.dat
 Problemset1/Exercise1/plots/
 Problemset1/Exercise1/opt*
 Problemset1/Exercise1/non*
