@@ -12,8 +12,8 @@ width=(max-min)/n #interval width
 hist(x,width)=width*floor(x/width)+width/2.0
 set boxwidth width*0.9
 
-#count and plot
-plot "nonOpt.dat" u (hist($1,width)):(1.0) smooth freq w boxes lc rgb"green" notitle
+#count and plot[0:1]
+plot[0:1] "nonOpt.dat" u (hist($1,width)):(1.0) smooth freq w boxes lc rgb"green" notitle
 set output
 
 set terminal png size 960,720
@@ -29,8 +29,8 @@ width=(max-min)/n #interval width
 hist(x,width)=width*floor(x/width)+width/2.0
 set boxwidth width*0.9
 
-#count and plot
-plot "opt3.dat" u (hist($1,width)):(1.0) smooth freq w boxes lc rgb"green" notitle
+#count and plot[0:1]
+plot[0:1] "opt3.dat" u (hist($1,width)):(1.0) smooth freq w boxes lc rgb"green" notitle
 set output
 
 set terminal png size 960,720
@@ -46,8 +46,8 @@ width=(max-min)/n #interval width
 hist(x,width)=width*floor(x/width)+width/2.0
 set boxwidth width*0.9
 
-#count and plot
-plot "nonOptPar.dat" u (hist($1,width)):(1.0) smooth freq w boxes lc rgb"green" notitle
+#count and plot[0:1]
+plot[0:1] "nonOptPar.dat" u (hist($1,width)):(1.0) smooth freq w boxes lc rgb"green" notitle
 set output
 
 set terminal png size 960,720
@@ -63,6 +63,6 @@ width=(max-min)/n #interval width
 hist(x,width)=width*floor(x/width)+width/2.0
 set boxwidth width*0.9
 
-#count and plot
-plot "opt3par.dat" u (hist($1,width)):(1.0) smooth freq w boxes lc rgb"green" notitle
+#count and plot[0:1]
+plot[0:1] "opt3par.dat" u (hist($1,width)):(1.0) smooth freq w boxes lc rgb"green" notitle
 set output
