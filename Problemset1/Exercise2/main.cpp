@@ -6,9 +6,14 @@ using namespace std;
 
 void fill(int size, int** a, int** b);
 
+
+/**
+ * Program to multiply two square matrices and compare the computation time of that process for
+ * automatic compiler vectorization and openMP parallelization.
+ */
 int main()
 {
-	int size = 200;
+	int size = 2000;
 	int** a;
 	int** b;
 

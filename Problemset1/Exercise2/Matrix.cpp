@@ -44,8 +44,8 @@ Matrix::Matrix(int size, int** matrix)
  * Clears the heap from this matrix.
  *
  * @author Stefan
- * @date Nov. 7, 2015
- * @version 0.1
+ * @date Nov. 9, 2015
+ * @version 1.0
  */
 Matrix::~Matrix()
 {
@@ -197,7 +197,7 @@ int** Matrix::initMatrix(int size)
  *
  * @author Stefan
  * @date Nov. 7, 2015
- * @version 0.1
+ * @version 1.0
  *
  * @param matrix The matrix at the right side of the multiplication.
  *
@@ -216,14 +216,14 @@ Matrix* Matrix::multiply(Matrix& matrix)
 
 	startTime = omp_get_wtime();
 	int stepresult = 0;
+
+	#pragma omp parallel for
 	for (int i = 0; i < _size; i++)
 	{
 		for (int j = 0; j < _size; j++)
 		{
-			#pragma omp parallel for
 			for (int k = 0; k < _size; k++)
 			{
-
 				stepresult += _matrix[i][k] * matrix[k][j];
 			}
 			result[i][j] = stepresult;

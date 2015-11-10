@@ -9,7 +9,17 @@
 #define MATRIX_H_
 
 /**
- * A class that represents a square matrix. It offers basic mathematical operations on that matrix.
+ * A class that represents a square matrix. It offers the operation of multiplication with another square matrix of the
+ * same size.
+ *
+ * Future plans: 	- Make SqMatrix an inhariting subtype of a more general Matrix class
+ * 					- Implement operators *, +, -, =
+ *
+ * @brief square matrix
+ *
+ * @author Stefan
+ * @date Nov. 6, 2015
+ * @version 1.0
  */
 class Matrix
 {
