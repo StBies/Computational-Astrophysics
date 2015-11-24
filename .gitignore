@@ -23,3 +23,6 @@ Problemset1/Exercise1/non*
 
 #Preliminary Problemset2
 #Problemset2/
+Problemset2/*.c
+Problemset2/*.out
+Problemset2/*.mod

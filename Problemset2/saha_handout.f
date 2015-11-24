@@ -183,22 +183,20 @@ c     ----------------------------------------------
 
 c     Check if interval contains the root:
       do while (f(nemin) * f(nemax) >= 0)
-	nemin = nemin - 0.1 * nemin
-	nemax = nemax + 0.1 * nemax
+        nemin = nemin - 0.1 * nemin
+        nemax = nemax + 0.1 * nemax
       end do
-
-      write (*,*) 'Intervall ist ok'
 
       itused = 0
       middle = (nemax + nemin) / 2.d0
 
       do while (abs(nemax - nemin) > 0.005 * nemax)
-	if (f(nemin) * f(middle) < 0) then
-		nemax = middle
-		middle = (nemin + middle) / 2
-	else if(f(middle) * f(nemax) < 0) then
-		nemin = middle
-		middle = (middle + nemax) / 2
+        if (f(nemin) * f(middle) < 0) then
+            nemax = middle
+            middle = (nemin + middle) / 2
+        else if(f(middle) * f(nemax) < 0) then
+            nemin = middle
+            middle = (middle + nemax) / 2
         end if
         itused = itused + 1		
       end do
