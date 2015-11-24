@@ -26,7 +26,7 @@ c
 * calculate partition function Q and ionization energies chi for
 * (T,Pg) and element code (100*z)
 ***********************************************************************
-c
+
       q(:) = 0
       chi(:) = 0
       select case(code)
@@ -45,16 +45,16 @@ c
        stop 'zusum error'
       end select
       return
-c
+
       end subroutine zusum
-c
-c
-c
+
+
+
       double precision function Saha(T,Ne)
 c     -----------------------------------------
       implicit none
       real*8, intent(in) :: T,Ne
-c
+
 ***********************************************************************
 * calculate Saha factor for H II -> H I
 ***********************************************************************
@@ -68,11 +68,11 @@ c--
 c-- some useful constants:
 c--
       real*8 :: sconst
-c
+
       integer i
-c
+
       save
-c
+
       sconst = 1.d0/(sqrt(2.d0*pi*me*kb)/h)**3
       ktinv = 1.d0/(kb*T)
 c--
@@ -86,13 +86,13 @@ c--
 c-- compute saha factor (H only):
 c--
       saha = sconst*q(0)/(q(1)*2.d0*t**1.5d0)*exp(chi(0)*ktinv)
-c
+
       return
-c
+
       end function saha
-c
-c
-c
+
+
+
       subroutine eos_ions(t_in,pg_in,pe_out,itused)
 c     ---------------------------------------------
       implicit none
@@ -132,7 +132,8 @@ c--
 c--
 c-- use a solver to solve for ne:
 c--
-      ne = 42
+      ne = 0
+      call rootfinder(ne,nemin,nemax,t,itused)
       pe = ne*kb*T
 c--
 c-- distribute the results to target array:
@@ -161,30 +162,86 @@ c--
       partial_pressures(0,1) = n_HI*kb*T
       partial_pressures(1,1) = n_HII*kb*T
       pe_out = pe
-c
+
       return
       end subroutine eos_ions
-c
+
+c--
+c Rootfinding-function
+c--
+      subroutine rootfinder(ne,nemax,nemin,t,itused)
+c     ----------------------------------------------
+      implicit none
+
+      real*8, intent(out) :: ne
+      real*8, intent(inout) :: nemax,nemin,t
+      integer, intent(out) :: itused
+
+      real*8 :: middle
+
+      write (*,*) 'Die Fortran, die!'
+
+c     Check if interval contains the root:
+      do while (f(nemin) * f(nemax) >= 0)
+	nemin = nemin - 0.1 * nemin
+	nemax = nemax + 0.1 * nemax
+      end do
+
+      write (*,*) 'Intervall ist ok'
+
+      itused = 0
+      middle = (nemax + nemin) / 2.d0
+
+      do while (abs(nemax - nemin) > 0.005 * nemax)
+	if (f(nemin) * f(middle) < 0) then
+		nemax = middle
+		middle = (nemin + middle) / 2
+	else if(f(middle) * f(nemax) < 0) then
+		nemin = middle
+		middle = (middle + nemax) / 2
+        end if
+        itused = itused + 1		
+      end do
+      ne = nemax
+      
+      return
+      end subroutine rootfinder
+c----------------END SUBROUTINE-----------------------------------
+
+c--
+c Nonlinear function from lecture notes
+c--
+      double precision function F(n_e)
+c     -------------------------------
+      implicit none
+
+      real*8 :: n_e
+
+      F = ((n_tot - n_e) / (1.d0 + n_e * saha(T,n_e)) - n_e)
+      end function F
+c---------------END FUNCTION--------------------------------------
+
+
       end module eos
-c
-c
-c
+
+
+
       program eos_table
       use eos
       implicit none
-c
+
       real*8 T,Pgas,Pe,qfak
       real*8 Pea,PH1,PH2
       integer :: i,itused
-c
+
       real*8 :: q(0:maxion),chi(0:maxion)
-c
+
       code(1) = 100 ! H
       code(2) = 200 ! He
-c
+
       eps(1) = 1.d0 ! eps(H)
       eps(2) = 0.d0 ! eps(He)
-c
+
       eps(:) = eps(:)/sum(eps(:)) ! re-normalize
 c
       T = 5000.d0
@@ -194,6 +251,7 @@ c--
 c-- test the real thing:
 c--
   300 continue
+      write(*,*) 'Fortran ist leider scheisse!'
       write(*,*) 'enter T,Pgas:'
       read(*,*) T,Pgas
       call eos_ions(t,pgas,pe,itused)
@@ -215,31 +273,30 @@ c--
       write(*,*) "analytic PH2=",PH2," error=",
      &           (partial_pressures(1,1)-PH2)/PH2
       goto 300
-c
+
       contains
-c
-c
-c
+
+
       subroutine analytic(T,Pg,Pe,PH1,PH2)
       implicit none
       real*8 :: T,Pg,Pe,PH1,PH2
-c
+
       include 'physconst.inc'
       real*8 ::N,Ne,phi,q1,q2,chi
-c
+
       N = Pg/(kb*T)
-c
+
       q1 = 2.d0
       q2 = 1.d0
       chi = 13.595d0*ev2erg
       phi = 2.d0*q2/q1*(2.d0*pi*me*kb*T/h**2)**1.5d0*exp(-chi/(kb*T))
-c
+
       Ne = phi*(sqrt(1.d0+N/phi)-1.d0)
-c
+
       Pe = Ne*kb*T
       PH2 = Pe
       PH1 = Pg-2.d0*Pe
-c
+
       return
       end subroutine analytic
       end
