@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1448356392 source:/home/stefan/workspace/Computational-Astrophysics/Problemset2/rootfinder.c
+	<stdio.h>
+	<math.h>
+
+1448356100 source:/home/stefan/workspace/Computational-Astrophysics/Problemset2/saha_handout.f
+
