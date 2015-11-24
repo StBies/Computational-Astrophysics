@@ -31,6 +31,11 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="physconst.inc" />
+		<Unit filename="rootfinder.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="saha_handout.f" />
 		<Extensions>
 			<code_completion />
 			<debugger />
