@@ -31,3 +31,5 @@ Problemset2/*.mod
 Problemset2/saha_handout
 Problemset2/*.o
 Problemset2/*.dat
+Problemset2/plots
+Problemset2/solution

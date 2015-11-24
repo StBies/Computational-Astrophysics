@@ -132,7 +132,7 @@ c--
 c--
 c-- use a solver to solve for ne:
 c--
-      call rootfinder_secant(ne,nemin,nemax,itused)
+      call rootfinder_newton(ne,nemin,nemax,itused)
       pe = ne*kb*T
 c--
 c-- distribute the results to target array:
@@ -243,6 +243,36 @@ c      write (*,*) 'Using secant method'
 
       return
       end subroutine rootfinder_secant
+c----------------END SUBROUTINE-----------------------------------
+
+c--
+c Rootfinding-function using the Newton method
+c--
+      subroutine rootfinder_newton(ne,nemax,nemin,itused)
+c     -----------------------------------------------------
+      implicit none
+
+      real*8, intent(out) :: ne
+      real*8, intent(inout) :: nemax,nemin
+      integer, intent(out) :: itused
+
+      real*8 :: m,b,buffer
+
+      buffer = nemax
+      itused = 0
+      ne = 0
+
+c      write (*,*) 'Using newton method'
+
+      do while (dabs(buffer - ne) > 0.0005 * dabs(ne))
+        m = (f(buffer+1.d-8)- f(buffer))/1.d-8
+        b = f(buffer) - m * buffer
+        ne = -(b/m)
+        itused = itused + 1
+      end do
+
+      return
+      end subroutine rootfinder_newton
 c----------------END SUBROUTINE-----------------------------------
 
 c--
