@@ -132,7 +132,6 @@ c--
 c--
 c-- use a solver to solve for ne:
 c--
-      ne = 0
       call rootfinder_secant(ne,nemin,nemax,t,itused)
       pe = ne*kb*T
 c--
@@ -170,7 +169,7 @@ c--
 c Rootfinding-function using the bisection method
 c--
       subroutine rootfinder_bisection(ne,nemax,nemin,t,itused)
-c     ---------------------------------------------------
+c     --------------------------------------------------------
       implicit none
 
       real*8, intent(out) :: ne
@@ -188,7 +187,7 @@ c     Check if interval contains the root:
       itused = 0
       middle = (nemax + nemin) / 2.d0
       
-      write (*,*) 'Using bisection method'
+      write(*,*) 'Using bisection method'
       
       do while (dabs(nemax - nemin) > 0.005 * nemax)
         if (f(nemin) * f(middle) < 0) then
@@ -210,7 +209,7 @@ c--
 c Rootfinding-function using the secant method
 c--
       subroutine rootfinder_secant(ne,nemax,nemin,t,itused)
-c     ---------------------------------------------------
+c     -----------------------------------------------------
       implicit none
 
       real*8, intent(out) :: ne
