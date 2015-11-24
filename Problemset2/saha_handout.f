@@ -6,7 +6,7 @@ c
       integer, parameter:: maxion=maxel
 c
       integer :: code(maxel)=(/ 100, 200 /) ! element codes
-      real*8 :: eps(maxel)=(/ 1.d0, 0.d0 /) ! element abundance
+      real*8 :: eps(maxel)=(/ 0.9d0, 0.1d0 /) ! element abundance
       real*8 :: partial_pressures(0:maxion,maxel)
 c
       real*8 :: ion_fraction(0:maxion)
@@ -175,7 +175,7 @@ c     --------------------------------------------------------
       real*8, intent(out) :: ne
       real*8, intent(inout) :: nemax,nemin
       integer, intent(out) :: itused
-      
+
       real*8 :: middle
 
 c     Check if interval contains the root:
@@ -186,9 +186,9 @@ c     Check if interval contains the root:
 
       itused = 0
       middle = (nemax + nemin) / 2.d0
-      
-      write(*,*) 'Using bisection method'
-      
+
+c      write(*,*) 'Using bisection method'
+
       do while (dabs(nemax - nemin) > 0.005 * nemax)
         if (f(nemin) * f(middle) < 0) then
             nemax = middle
@@ -197,10 +197,10 @@ c     Check if interval contains the root:
             nemin = middle
             middle = (middle + nemax) / 2
         end if
-        itused = itused + 1		
+        itused = itused + 1
       end do
       ne = nemax
-      
+
       return
       end subroutine rootfinder_bisection
 c----------------END SUBROUTINE-----------------------------------
@@ -215,24 +215,24 @@ c     -----------------------------------------------------
       real*8, intent(out) :: ne
       real*8, intent(inout) :: nemax,nemin
       integer, intent(out) :: itused
-      
+
       real*8 :: bufferOne, bufferTwo
-      
-      
+
+
 c     Check if interval contains the root:
       do while (f(nemin) * f(nemax) >= 0)
         nemin = nemin - 0.1 * nemin
         nemax = nemax + 0.1 * nemax
       end do
-      
+
       bufferOne = nemin
       bufferTwo = nemax
 
       ne = 0
       itused = 0
-      
-      write (*,*) 'Using secant method'
-      
+
+c      write (*,*) 'Using secant method'
+
       do while (dabs(bufferTwo - bufferOne) > 0.005 * ne)
         ne = bufferOne - f(bufferOne) * ((bufferOne - bufferTwo) /
      & (f(bufferOne)-f(bufferTwo)))
@@ -240,7 +240,7 @@ c     Check if interval contains the root:
         bufferOne = ne
         itused = itused + 1
       end do
-      
+
       return
       end subroutine rootfinder_secant
 c----------------END SUBROUTINE-----------------------------------
@@ -257,11 +257,7 @@ c     -------------------------------
       F = ((n_tot - n_e) / (1.d0 + n_e * saha(T,n_e)) - n_e)
       end function F
 c---------------END FUNCTION--------------------------------------
-
-
       end module eos
-
-
 
       program eos_table
       use eos
@@ -276,8 +272,8 @@ c---------------END FUNCTION--------------------------------------
       code(1) = 100 ! H
       code(2) = 200 ! He
 
-      eps(1) = 1.d0 ! eps(H)
-      eps(2) = 0.d0 ! eps(He)
+      eps(1) = 0.9d0 ! eps(H)
+      eps(2) = 0.1d0 ! eps(He)
 
       eps(:) = eps(:)/sum(eps(:)) ! re-normalize
 c
@@ -288,6 +284,7 @@ c--
 c-- test the real thing:
 c--
   300 continue
+c      call measure(t,itused)
       write(*,*) 'enter T,Pgas:'
       read(*,*) T,Pgas
       call eos_ions(t,pgas,pe,itused)
@@ -295,7 +292,7 @@ c--
       write(*,*) 'Pe=',Pe
       write(*,*) 'iterations:',itused
       write(*,*) 'partial pressures'
-      do i=1,1
+      do i=1,2
        write(*,*) 'code=',code(i)
        write(*,*) partial_pressures(0:code(i)/100,i)
       enddo
@@ -337,4 +334,29 @@ c--
 
       return
       end subroutine analytic
+
+      subroutine measure(t,itused)
+c     ------------------
+      implicit none
+      real*8, intent(inout) :: t
+      integer, intent(inout) :: itused
+
+      real*8 :: lowpressure
+      real*8 :: midpressure
+      real*8 :: highpressure
+
+      t = 100.d0
+      do while (t <= 1.d6)
+        call eos_ions(t,1.d-4,pe,itused)
+        lowpressure = pe
+        call eos_ions(t,1.d6,pe,itused)
+        midpressure = pe
+        call eos_ions(t,1.d12,pe,itused)
+        highpressure = pe
+        write(*,*) t,lowpressure,midpressure,highpressure
+        t = t + 1.d2
+      end do
+
+      end subroutine measure
+
       end
