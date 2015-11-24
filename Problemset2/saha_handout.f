@@ -132,7 +132,7 @@ c--
 c--
 c-- use a solver to solve for ne:
 c--
-      call rootfinder_secant(ne,nemin,nemax,t,itused)
+      call rootfinder_secant(ne,nemin,nemax,itused)
       pe = ne*kb*T
 c--
 c-- distribute the results to target array:
@@ -168,12 +168,12 @@ c--
 c--
 c Rootfinding-function using the bisection method
 c--
-      subroutine rootfinder_bisection(ne,nemax,nemin,t,itused)
+      subroutine rootfinder_bisection(ne,nemax,nemin,itused)
 c     --------------------------------------------------------
       implicit none
 
       real*8, intent(out) :: ne
-      real*8, intent(inout) :: nemax,nemin,t
+      real*8, intent(inout) :: nemax,nemin
       integer, intent(out) :: itused
       
       real*8 :: middle
@@ -208,12 +208,12 @@ c----------------END SUBROUTINE-----------------------------------
 c--
 c Rootfinding-function using the secant method
 c--
-      subroutine rootfinder_secant(ne,nemax,nemin,t,itused)
+      subroutine rootfinder_secant(ne,nemax,nemin,itused)
 c     -----------------------------------------------------
       implicit none
 
       real*8, intent(out) :: ne
-      real*8, intent(inout) :: nemax,nemin,t
+      real*8, intent(inout) :: nemax,nemin
       integer, intent(out) :: itused
       
       real*8 :: bufferOne, bufferTwo
