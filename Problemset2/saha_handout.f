@@ -313,6 +313,8 @@ c--
       contains
 
 
+
+
       subroutine analytic(T,Pg,Pe,PH1,PH2)
       implicit none
       real*8 :: T,Pg,Pe,PH1,PH2
