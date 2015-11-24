@@ -133,7 +133,7 @@ c--
 c-- use a solver to solve for ne:
 c--
       ne = 0
-      call rootfinder(ne,nemin,nemax,t,itused)
+      call rootfinder_secant(ne,nemin,nemax,t,itused)
       pe = ne*kb*T
 c--
 c-- distribute the results to target array:
@@ -167,19 +167,17 @@ c--
       end subroutine eos_ions
 
 c--
-c Rootfinding-function
+c Rootfinding-function using the bisection method
 c--
-      subroutine rootfinder(ne,nemax,nemin,t,itused)
-c     ----------------------------------------------
+      subroutine rootfinder_bisection(ne,nemax,nemin,t,itused)
+c     ---------------------------------------------------
       implicit none
 
       real*8, intent(out) :: ne
       real*8, intent(inout) :: nemax,nemin,t
       integer, intent(out) :: itused
-
+      
       real*8 :: middle
-
-      write (*,*) 'Die Fortran, die!'
 
 c     Check if interval contains the root:
       do while (f(nemin) * f(nemax) >= 0)
@@ -189,8 +187,10 @@ c     Check if interval contains the root:
 
       itused = 0
       middle = (nemax + nemin) / 2.d0
-
-      do while (abs(nemax - nemin) > 0.005 * nemax)
+      
+      write (*,*) 'Using bisection method'
+      
+      do while (dabs(nemax - nemin) > 0.005 * nemax)
         if (f(nemin) * f(middle) < 0) then
             nemax = middle
             middle = (nemin + middle) / 2
@@ -203,7 +203,47 @@ c     Check if interval contains the root:
       ne = nemax
       
       return
-      end subroutine rootfinder
+      end subroutine rootfinder_bisection
+c----------------END SUBROUTINE-----------------------------------
+
+c--
+c Rootfinding-function using the secant method
+c--
+      subroutine rootfinder_secant(ne,nemax,nemin,t,itused)
+c     ---------------------------------------------------
+      implicit none
+
+      real*8, intent(out) :: ne
+      real*8, intent(inout) :: nemax,nemin,t
+      integer, intent(out) :: itused
+      
+      real*8 :: bufferOne, bufferTwo
+      
+      
+c     Check if interval contains the root:
+      do while (f(nemin) * f(nemax) >= 0)
+        nemin = nemin - 0.1 * nemin
+        nemax = nemax + 0.1 * nemax
+      end do
+      
+      bufferOne = nemin
+      bufferTwo = nemax
+
+      ne = 0
+      itused = 0
+      
+      write (*,*) 'Using secant method'
+      
+      do while (dabs(bufferTwo - bufferOne) > 0.005 * ne)
+        ne = bufferOne - f(bufferOne) * ((bufferOne - bufferTwo) /
+     & (f(bufferOne)-f(bufferTwo)))
+        bufferTwo = bufferOne
+        bufferOne = ne
+        itused = itused + 1
+      end do
+      
+      return
+      end subroutine rootfinder_secant
 c----------------END SUBROUTINE-----------------------------------
 
 c--
@@ -249,7 +289,6 @@ c--
 c-- test the real thing:
 c--
   300 continue
-      write(*,*) 'Fortran ist leider scheisse!'
       write(*,*) 'enter T,Pgas:'
       read(*,*) T,Pgas
       call eos_ions(t,pgas,pe,itused)

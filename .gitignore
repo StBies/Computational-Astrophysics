@@ -26,3 +26,5 @@ Problemset1/Exercise1/non*
 Problemset2/*.c
 Problemset2/*.out
 Problemset2/*.mod
+Problemset2/saha_handout
+Problemset2/*.o
