@@ -132,7 +132,7 @@ c--
 c--
 c-- use a solver to solve for ne:
 c--
-      call rootfinder_newton(ne,nemin,nemax,itused)
+      call rootfinder_secant(ne,nemin,nemax,itused)
       pe = ne*kb*T
 c--
 c-- distribute the results to target array:
@@ -167,6 +167,18 @@ c--
 
 c--
 c Rootfinding-function using the bisection method
+c
+c Author: Stefan
+c
+c parameters:
+c  - ne: pointer to the electron density variable
+c  - nemax: pointer to the upper ne-interval
+c  - nemin: pointer to the lower ne-interval
+c  - itused: pointer to the iterations counter variable
+c
+c returns:
+c  - electron density ne
+c  - number of iterations needed to solve
 c--
       subroutine rootfinder_bisection(ne,nemax,nemin,itused)
 c     --------------------------------------------------------
@@ -207,6 +219,18 @@ c----------------END SUBROUTINE-----------------------------------
 
 c--
 c Rootfinding-function using the secant method
+c
+c Author: Stefan
+c
+c parameters:
+c  - ne: pointer to the electron density variable
+c  - nemax: pointer to the upper ne-interval
+c  - nemin: pointer to the lower ne-interval
+c  - itused: pointer to the iterations counter variable
+c
+c returns:
+c  - electron density ne
+c  - number of iterations needed to solve
 c--
       subroutine rootfinder_secant(ne,nemax,nemin,itused)
 c     -----------------------------------------------------
@@ -247,6 +271,18 @@ c----------------END SUBROUTINE-----------------------------------
 
 c--
 c Rootfinding-function using the Newton method
+c
+c Author: Stefan
+c
+c parameters:
+c  - ne: pointer to the electron density variable
+c  - nemax: pointer to the upper ne-interval
+c  - nemin: pointer to the lower ne-interval
+c  - itused: pointer to the iterations counter variable
+c
+c returns:
+c  - electron density ne
+c  - number of iterations needed to solve
 c--
       subroutine rootfinder_newton(ne,nemax,nemin,itused)
 c     -----------------------------------------------------
@@ -256,18 +292,19 @@ c     -----------------------------------------------------
       real*8, intent(inout) :: nemax,nemin
       integer, intent(out) :: itused
 
-      real*8 :: m,b,buffer
+      real*8 :: m,b,nextNe
 
-      buffer = nemax
+      nextNe = 0
       itused = 0
-      ne = 0
+      ne = nemax
 
 c      write (*,*) 'Using newton method'
 
-      do while (dabs(buffer - ne) > 0.0005 * dabs(ne))
-        m = (f(buffer+1.d-8)- f(buffer))/1.d-8
-        b = f(buffer) - m * buffer
-        ne = -(b/m)
+      do while (dabs(nextNe - ne) > 0.0005 * dabs(nextNe))
+        ne = nextNe
+        m = (f(ne+1.d-9)- f(ne))/1.d-9
+        b = f(ne) - m * ne
+        nextNe = -(b/m)
         itused = itused + 1
       end do
 
@@ -365,6 +402,16 @@ c--
       return
       end subroutine analytic
 
+c--
+c A subroutine to write results for three different, fixed gaspressures
+c to the console for temperatures from 100K to 10**6K.
+c
+c Author: Stefan
+c
+c parameters:
+c  - t: pointer to the temperature variable
+c  - itused: pointer to the iterations counter variable
+c--
       subroutine measure(t,itused)
 c     ------------------
       implicit none
