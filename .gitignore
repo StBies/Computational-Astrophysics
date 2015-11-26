@@ -8,6 +8,7 @@ Problemset*/Exercise*/*.*~
 #eclipse-files
 .metadata/
 RemoteSystemsTempFiles/
+Problemset*/.*
 
 #Binaries
 Problemset*/Exercise*/bin/
@@ -16,6 +17,8 @@ Problemset*/Exercise*/obj/
 Problemset*/Exercise*/*.out
 Problemset*/obj
 Problemset*/bin
+Problemset*/Debug
+Problemset*/Release
 
 #Data for Set1/Exercise1
 Problemset*/Exercise*/*.dat

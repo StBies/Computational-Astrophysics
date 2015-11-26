@@ -13,7 +13,7 @@ void fill(int size, int** a, int** b);
  */
 int main()
 {
-	int size = 2000;
+	int size = 4000;
 	int** a;
 	int** b;
 
