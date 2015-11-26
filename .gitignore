@@ -36,3 +36,6 @@ Problemset2/*.o
 Problemset2/*.dat
 Problemset2/plots
 Problemset2/solution
+
+#UML
+Problemset*/UML/*.html
