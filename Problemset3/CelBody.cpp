@@ -7,12 +7,14 @@
 
 #include "CelBody.h"
 
-CelBody::CelBody() {
+CelBody::CelBody()
+{
 	// TODO Auto-generated constructor stub
 
 }
 
-CelBody::~CelBody() {
+CelBody::~CelBody()
+{
 	// TODO Auto-generated destructor stub
 }
 
