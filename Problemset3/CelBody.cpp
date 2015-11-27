@@ -10,6 +10,20 @@
 
 using namespace std;
 
+
+/**
+ * Initializes a celestial body with the passed values.
+ *
+ * @author Stefan
+ * @date Nov. 27, 2015
+ * @version 0.1
+ *
+ * @param mass the body's mass in kg
+ * @param x the x coordinate in km
+ * @param y the y coordinate in km
+ * @param velocityX the velocity in x direction in km/s
+ * @param velocityY the velocity in y direction in km/s
+ */
 CelBody::CelBody(double mass, double x, double y, double velocityX, double velocityY)
 {
 	_mass = mass;
@@ -148,6 +162,55 @@ vector<double>* CelBody::getCoords()
 }
 
 /**
+ * Setter-method for the body's mass. Will set the mass of the object to be the passed mass in kg
+ *
+ * @author Stefan
+ * @date Nov. 27, 2015
+ * @version 0.1
+ *
+ * @param mass New mass of the celestial body in kg
+ * @require mass >= 0.0
+ */
+void CelBody::setMass(double mass)
+{
+	_mass = mass;
+}
+
+/**
+ * Setter-method for the body's velocity in x-direction. Will set the x velocity of the object to be the passed
+ * velocity in km/s.
+ *
+ * @author Stefan
+ * @date Nov. 27, 2015
+ * @version 0.1
+ *
+ * @param velocity New velocity in the x-direction in km/s
+ *
+ * @ensure this->getVelocityX() == velocity
+ */
+void CelBody::setVelocityX(double velocity)
+{
+	_velocity[0] = velocity;
+}
+
+/**
+ * Setter-method for the body's velocity in y-direction. Will set the y velocity of the object to be the passed
+ * velocity in km/s.
+ *
+ * @author Stefan
+ * @date Nov. 27, 2015
+ * @version 0.1
+ *
+ * @param velocity New velocity in the y-direction in km/s
+ *
+ * @ensure this->getVelocityY() == velocity
+ */
+void CelBody::setVelocityY(double velocity)
+{
+	_velocity[1] = velocity;
+}
+
+/**
  * Setter-method for the celestial body's velocity. The set velocityvector will be the body's new velocity.
  *
  * @brief Setter for the velocityvector
@@ -169,5 +232,54 @@ void CelBody::setVelocity(vector<double>& velocity)
 	_velocity = velocity;
 }
 
+/**
+ * Setter for the x-coordinate. Will set the body's x-coordinate to the passed value (in km).
+ *
+ * @author Stefan
+ * @date Nov 27, 2015
+ * @version 0.1
+ *
+ * @param x The new x coordinate.
+ *
+ * @ensure this->getX() == x
+ */
+void CelBody::setX(double x)
+{
+	_velocity[0] = x;
+}
 
+/**
+ * Setter for the y-coordinate. Will set the body's y-coordinate to the passed value (in km).
+ *
+ * @author Stefan
+ * @date Nov 27, 2015
+ * @version 0.1
+ *
+ * @param y The new y coordinate.
+ *
+ * @ensure this->getY() == y
+ */
+void CelBody::setY(double y)
+{
+	_velocity[1] = y;
+}
 
+/**
+ * Setter for the coordinatevector. Will set the body's coordinates to the passed coordinatevector containing double precision
+ * floating point coordinates in km.
+ *
+ * @author Stefan
+ * @date Nov 27, 2015
+ * @version 0.1
+ *
+ * @param coords the new coordinatevector as a reference.
+ *
+ * @require &coords != nullptr
+ * @require coords.size() == this->getCoords()->size()
+ *
+ * @ensure this->getCoords() == &coords
+ */
+void CelBody::setCoords(vector<double>& coords)
+{
+	_coords = coords;
+}

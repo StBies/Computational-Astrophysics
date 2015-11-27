@@ -33,13 +33,15 @@ public:
 	double getY();
 	std::vector<double>* getCoords();
 
+	void setMass(double mass);
+
 	void setVelocity(std::vector<double>& velocity);
 	void setVelocityX(double velocity);
 	void setVelocityY(double velocity);
 
 	void setX(double x);
 	void setY(double y);
-	void setCoords(std::vector<double>);
+	void setCoords(std::vector<double>& coords);
 
 protected:
 	double _mass;
