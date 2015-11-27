@@ -1,25 +1,26 @@
 /*
- * Star.cpp
+ * Planet.cpp
  *
  *  Created on: Nov 27, 2015
  *      Author: Stefan
  */
 
-#include "Star.h"
+#include "Planet.h"
 
-Star::Star() : CelBody(10,10,10,10,10)
+Planet::Planet() : CelBody(10,10,10,10,10)
 {
 	// TODO edit superconstructor call
 	// TODO Auto-generated constructor stub
+
 }
 
-Star::~Star()
+Planet::~Planet()
 {
 	// TODO Auto-generated destructor stub
 }
 
 /**
- * Check, if the object is movable. For simplification, stars (for now) are not movable, so velocity is fixed to zero.
+ * Check, if the object is movable.
  *
  * @author Stefan
  * @date Nov. 27, 2015
@@ -27,7 +28,8 @@ Star::~Star()
  *
  * @return True if object can change coordinates, false if not.
  */
-bool Star::isMovable()
+bool Planet::isMovable()
 {
-	return false;
+	return true;
 }
+

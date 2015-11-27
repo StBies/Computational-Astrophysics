@@ -16,8 +16,8 @@
  *
  * @brief Representation of a celestial body.
  * @author Stefan
- * @date Nov. 26, 2015
- * @version 0.1
+ * @date Nov. 27, 2015
+ * @version 0.5
  */
 class CelBody
 {
