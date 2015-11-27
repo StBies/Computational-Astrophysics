@@ -12,7 +12,7 @@
 #include <vector>
 
 /**
- * A class representing a celestial body. The body is considered a pointlike mass.
+ * Abstract class representing a celestial body. The body is considered a pointlike mass.
  *
  * @brief Representation of a celestial body.
  * @author Stefan
@@ -42,6 +42,8 @@ public:
 	void setX(double x);
 	void setY(double y);
 	void setCoords(std::vector<double>& coords);
+
+	virtual bool isMovable() = 0;
 
 protected:
 	double _mass;

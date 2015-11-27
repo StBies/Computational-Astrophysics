@@ -18,3 +18,11 @@ Star::~Star()
 	// TODO Auto-generated destructor stub
 }
 
+/**
+ * Check, if the object is movable. For simplification, stars (for now) are not movable, so velocity is fixed to zero.
+ * @return True if object can change coordinates, false if not.
+ */
+bool Star::isMovable()
+{
+	return false;
+}
