@@ -22,10 +22,26 @@
 class CelBody
 {
 public:
-	CelBody();
+	CelBody(double mass, double x, double y, double velocityX, double velocityY);
 	virtual ~CelBody();
 
-private:
+	double getMass();
+	double getVelocityX();
+	double getVelocityY();
+	std::vector<double>* getVeclocity();
+	double getX();
+	double getY();
+	std::vector<double>* getCoords();
+
+	void setVelocity(std::vector<double>& velocity);
+	void setVelocityX(double velocity);
+	void setVelocityY(double velocity);
+
+	void setX(double x);
+	void setY(double y);
+	void setCoords(std::vector<double>);
+
+protected:
 	double _mass;
 	std::vector<double> _coords;
 	std::vector<double> _velocity;

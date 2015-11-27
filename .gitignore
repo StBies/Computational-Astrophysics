@@ -1,5 +1,6 @@
 # Documentation
 Problemset1/Exercise2/doc/
+Problemset*/doc
 
 # Backupfiles
 *.*~
@@ -8,7 +9,7 @@ Problemset*/Exercise*/*.*~
 #eclipse-files
 .metadata/
 RemoteSystemsTempFiles/
-Problemset*/.*
+Problemset*/.settings/
 
 #Binaries
 Problemset*/Exercise*/bin/
@@ -39,3 +40,4 @@ Problemset2/solution
 
 #UML
 Problemset*/UML/*.html
+
