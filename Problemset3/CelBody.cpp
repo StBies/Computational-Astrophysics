@@ -10,7 +10,6 @@
 
 using namespace std;
 
-
 /**
  * Initializes a celestial body with the passed values.
  *
@@ -24,7 +23,8 @@ using namespace std;
  * @param velocityX the velocity in x direction in km/s
  * @param velocityY the velocity in y direction in km/s
  */
-CelBody::CelBody(double mass, double x, double y, double velocityX, double velocityY)
+CelBody::CelBody(double mass, double x, double y, double velocityX,
+		double velocityY)
 {
 	_mass = mass;
 	_coords = *new vector<double>;
@@ -39,8 +39,8 @@ CelBody::CelBody(double mass, double x, double y, double velocityX, double veloc
 
 CelBody::~CelBody()
 {
-	delete [] &_velocity;
-	delete [] &_coords;
+	delete[] &_velocity;
+	delete[] &_coords;
 }
 
 /**
@@ -106,11 +106,10 @@ double CelBody::getVelocityY()
  *
  * @return velocityvector in x and y direction [km/s]
  */
-vector<double>* CelBody::getVeclocity()
+vector<double>* CelBody::getVelocity()
 {
 	return &_velocity;
 }
-
 
 /**
  * Getter-method for the celestial body's x coordinate. Will return the coordinate in km as a double precision number.
@@ -216,8 +215,8 @@ void CelBody::setVelocityY(double velocity)
  * @brief Setter for the velocityvector
  *
  * @author Stefan
- * @date Nov 27, 2015
- * @version 0.1
+ * @date Dec. 1, 2015
+ * @version 0.6
  *
  * @param velocity The new velocityvector containing two double precision elements (x,y). Must be a reference to an object
  * 		           on the heap
@@ -229,6 +228,8 @@ void CelBody::setVelocityY(double velocity)
  */
 void CelBody::setVelocity(vector<double>& velocity)
 {
+	vector<double>* buffer = &_velocity;
+	delete[] buffer;
 	_velocity = velocity;
 }
 
@@ -269,8 +270,8 @@ void CelBody::setY(double y)
  * floating point coordinates in km.
  *
  * @author Stefan
- * @date Nov 27, 2015
- * @version 0.1
+ * @date Dec. 1, 2015
+ * @version 0.6
  *
  * @param coords the new coordinatevector as a reference.
  *
@@ -281,5 +282,7 @@ void CelBody::setY(double y)
  */
 void CelBody::setCoords(vector<double>& coords)
 {
+	vector<double>* buffer = &_coords;
+	delete[] buffer;
 	_coords = coords;
 }

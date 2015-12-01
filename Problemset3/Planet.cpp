@@ -7,9 +7,8 @@
 
 #include "Planet.h"
 #include "constants.h"
-#include <iostream>
 
-Planet::Planet() : CelBody(10,10,10,10,10)
+Planet::Planet() : CelBody(EARTH_MASS,AU,0,0,-1)
 {
 	// TODO edit superconstructor call
 	// TODO Auto-generated constructor stub

@@ -6,6 +6,8 @@
  */
 
 #include "PhysSim.h"
+#include "constants.h"
+#include <cmath>
 
 /**
  * Initializes a simulator object.
@@ -23,7 +25,7 @@ PhysSim::PhysSim()
 PhysSim::~PhysSim()
 {
 	// TODO maybe delete all contained objects as well?
-	delete [] &_bodies;
+	delete[] &_bodies;
 }
 
 /**
@@ -52,6 +54,41 @@ void PhysSim::addBody(CelBody* body)
  */
 void PhysSim::update()
 {
-	// TODO implement
+	double timestep = 1.337;
+	//calculate net force for each CelBody
+	for (unsigned int i = 0; i < _bodies.size(); i++)
+	{
+		std::vector<double> force = {0,0};
+
+		for (unsigned int j = 0; j < _bodies.size(); j++)
+		{
+			double r = 0.0;
+
+			if (i != j)
+			{
+				r = _bodies[i]->getX() - _bodies[j]->getX();
+				force[0] += -GRAV_CONST * (_bodies[j]->getMass() * r)/ std::pow(r,3);
+				r = _bodies[i]->getY() - _bodies[j]->getY();
+				force[1] += -GRAV_CONST * (_bodies[j]->getMass() * r)/ std::pow(r,3);
+			}
+		}
+
+		//update position and velocity
+		if (_bodies[i]->isMovable())
+		{
+			std::vector<double>* coords;
+			std::vector<double>* velocity;
+
+			coords = _bodies[i]->getCoords();
+			velocity = _bodies[i]->getVelocity();
+
+			for(unsigned int k = 0; k < 2; k++)
+			{
+				(*coords)[k] += timestep * (*velocity)[k];
+				(*velocity)[k] += timestep * force[k];
+			}
+		}
+	}
+
 }
 

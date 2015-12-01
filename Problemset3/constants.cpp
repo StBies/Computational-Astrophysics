@@ -6,7 +6,7 @@
  *
  * @author Stefan
  * @date Dec. 01, 2015
- * @version 0.01
+ * @version 0.8
  */
 
 /**

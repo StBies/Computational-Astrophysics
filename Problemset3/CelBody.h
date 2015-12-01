@@ -28,7 +28,7 @@ public:
 	double getMass();
 	double getVelocityX();
 	double getVelocityY();
-	std::vector<double>* getVeclocity();
+	std::vector<double>* getVelocity();
 	double getX();
 	double getY();
 	std::vector<double>* getCoords();
