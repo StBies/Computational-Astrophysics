@@ -47,29 +47,39 @@ void PhysSim::addBody(CelBody* body)
 
 /**
  * Calculates new coordinates and velocities for all celestial bodies, this object holds.
+ * Solving Newton's equation of motion with the explicit Euler method.
  *
  * @author Stefan
  * @date Dec. 01, 2015
- * @version 0.6
+ * @version 0.7
  */
 void PhysSim::update()
 {
-	double timestep = 1.337;
+	double timestep = 0.1337;
 	//calculate net force for each CelBody
 	for (unsigned int i = 0; i < _bodies.size(); i++)
 	{
-		std::vector<double> force = {0,0};
+		std::vector<double> force =
+		{ 0, 0 };
 
 		for (unsigned int j = 0; j < _bodies.size(); j++)
 		{
-			double r = 0.0;
+			double distanceComponent = 0.0;
+			double distance = std::sqrt(
+					std::pow(_bodies[i]->getX() - _bodies[j]->getX(), 2)
+							+ std::pow(_bodies[i]->getY() - _bodies[j]->getY(),
+									2));
 
 			if (i != j)
 			{
-				r = _bodies[i]->getX() - _bodies[j]->getX();
-				force[0] += -GRAV_CONST * (_bodies[j]->getMass() * r)/ std::pow(r,3);
-				r = _bodies[i]->getY() - _bodies[j]->getY();
-				force[1] += -GRAV_CONST * (_bodies[j]->getMass() * r)/ std::pow(r,3);
+				distanceComponent = _bodies[i]->getX() - _bodies[j]->getX();
+				force[0] += -GRAV_CONST
+						* (_bodies[j]->getMass() * distanceComponent)
+						/ std::pow(distance, 3.0);
+				distanceComponent = _bodies[i]->getY() - _bodies[j]->getY();
+				force[1] += -GRAV_CONST
+						* (_bodies[j]->getMass() * distanceComponent)
+						/ std::pow(distance, 3.0);
 			}
 		}
 
@@ -82,13 +92,11 @@ void PhysSim::update()
 			coords = _bodies[i]->getCoords();
 			velocity = _bodies[i]->getVelocity();
 
-			for(unsigned int k = 0; k < 2; k++)
+			for (unsigned int k = 0; k < 2; k++)
 			{
 				(*coords)[k] += timestep * (*velocity)[k];
 				(*velocity)[k] += timestep * force[k];
 			}
 		}
 	}
-
 }
-

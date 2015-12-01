@@ -23,7 +23,7 @@
 class Planet: public CelBody
 {
 public:
-	Planet();
+	Planet(double mass, double x, double y, double velocityX, double velocityY);
 	virtual ~Planet();
 
 	bool isMovable();

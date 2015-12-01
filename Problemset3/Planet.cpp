@@ -6,11 +6,10 @@
  */
 
 #include "Planet.h"
-#include "constants.h"
 
-Planet::Planet() : CelBody(EARTH_MASS,AU,0,0,-1)
+Planet::Planet(double mass, double x, double y, double velocityX,double velocityY)
+: CelBody(mass, x, y, velocityX, velocityY)
 {
-	// TODO edit superconstructor call
 	// TODO Auto-generated constructor stub
 
 }
