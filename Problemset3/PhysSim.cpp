@@ -49,8 +49,8 @@ void PhysSim::addBody(CelBody* body)
  * Calculates new coordinates and velocities for all celestial bodies, this object holds.
  *
  * @author Stefan
- * @date Nov. 27, 2015
- * @version 0.1
+ * @date Dec. 01, 2015
+ * @version 0.6
  */
 void PhysSim::update()
 {
