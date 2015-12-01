@@ -8,7 +8,8 @@
 #include "Star.h"
 #include "constants.h"
 
-Star::Star() : CelBody(SOLAR_MASS,0,0,0,0)
+Star::Star(double mass, double x, double y, double velocityX, double velocityY)
+: CelBody(mass,x,y,velocityX,velocityY)
 {
 	// TODO edit superconstructor call
 	// TODO Auto-generated constructor stub

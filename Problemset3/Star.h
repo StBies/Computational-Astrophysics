@@ -24,7 +24,7 @@
 class Star: public CelBody
 {
 public:
-	Star();
+	Star(double mass, double x, double y, double velocityX, double velocityY);
 	virtual ~Star();
 
 	bool isMovable();
