@@ -8,6 +8,21 @@
 #include "Star.h"
 #include "constants.h"
 
+/**
+ * Initializes a Star object with the given parameters.
+ *
+ * @brief constructor
+ *
+ * @author Stefan
+ * @date Dec. 01, 2015
+ * @version 0.8
+ *
+ * @param mass Star's mass [kg]
+ * @param x Star's initial x coordinate [km]
+ * @param y Star's initial y coordinate [km]
+ * @param velocityX initial velocity in x direction [km/s]
+ * @param velocityY initial velocity in y direction [km/s]
+ */
 Star::Star(double mass, double x, double y, double velocityX, double velocityY)
 : CelBody(mass,x,y,velocityX,velocityY)
 {

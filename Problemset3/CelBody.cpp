@@ -13,6 +13,8 @@ using namespace std;
 /**
  * Initializes a celestial body with the passed values.
  *
+ * @brief constructor
+ *
  * @author Stefan
  * @date Nov. 27, 2015
  * @version 0.1
@@ -120,7 +122,7 @@ vector<double>* CelBody::getVelocity()
  * @date Nov 27, 2015
  * @version 0.1
  *
- * @return x coordinate of the celestial body
+ * @return x coordinate of the celestial body [km]
  */
 double CelBody::getX()
 {
@@ -200,7 +202,7 @@ void CelBody::setVelocityX(double velocity)
  * @date Nov. 27, 2015
  * @version 0.1
  *
- * @param velocity New velocity in the y-direction in km/s
+ * @param velocity New velocity in the y-direction [km/s]
  *
  * @ensure this->getVelocityY() == velocity
  */
@@ -219,7 +221,7 @@ void CelBody::setVelocityY(double velocity)
  * @version 0.6
  *
  * @param velocity The new velocityvector containing two double precision elements (x,y). Must be a reference to an object
- * 		           on the heap
+ * 		           on the heap [km/s]
  *
  * @require velocity != nullptr
  * @require velocity->size() == this->getVeclocity()->size()
@@ -240,7 +242,7 @@ void CelBody::setVelocity(vector<double>& velocity)
  * @date Nov 27, 2015
  * @version 0.1
  *
- * @param x The new x coordinate.
+ * @param x The new x coordinate [km].
  *
  * @ensure this->getX() == x
  */
@@ -256,7 +258,7 @@ void CelBody::setX(double x)
  * @date Nov 27, 2015
  * @version 0.1
  *
- * @param y The new y coordinate.
+ * @param y The new y coordinate [km].
  *
  * @ensure this->getY() == y
  */
@@ -273,7 +275,7 @@ void CelBody::setY(double y)
  * @date Dec. 1, 2015
  * @version 0.6
  *
- * @param coords the new coordinatevector as a reference.
+ * @param coords the new coordinatevector containing doubles [km] as a reference.
  *
  * @require &coords != nullptr
  * @require coords.size() == this->getCoords()->size()
