@@ -10,7 +10,7 @@
 
 #pragma once
 #include "CelBody.h"
-#include "Star.h"
+
 
 /**
  * Physical simulation class, that calculates the forces of all containing celestial objects and updating their
