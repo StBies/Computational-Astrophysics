@@ -6,9 +6,12 @@
  */
 
 #include "Planet.h"
+#include "constants.h"
+#include <iostream>
 
 Planet::Planet() : CelBody(10,10,10,10,10)
 {
+	std::cout << "Adress from Planet: " << &GRAV_CONST << std::endl;
 	// TODO edit superconstructor call
 	// TODO Auto-generated constructor stub
 
