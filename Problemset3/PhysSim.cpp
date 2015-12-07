@@ -77,8 +77,7 @@ void PhysSim::update(double timestep)
 
 			if (i != j)
 			{
-				double distance = std::sqrt(
-									std::pow(_bodies[i]->getX() - _bodies[j]->getX(), 2)
+				double distance = std::sqrt(std::pow(_bodies[i]->getX() - _bodies[j]->getX(),2)
 											+ std::pow(_bodies[i]->getY() - _bodies[j]->getY(),2));
 
 				distanceComponent = _bodies[i]->getX() - _bodies[j]->getX();
