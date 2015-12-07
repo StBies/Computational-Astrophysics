@@ -13,8 +13,8 @@
  * Initializes a simulator object.
  *
  * @author Stefan
- * @date Nov. 27, 2015
- * @version 0.1
+ * @date Dec. 7, 2015
+ * @version 0.2
  */
 PhysSim::PhysSim()
 {
