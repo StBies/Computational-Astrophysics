@@ -29,7 +29,7 @@ public:
 	virtual ~PhysSim();
 
 	void addBody(CelBody* body);
-	void update();
+	void update(double timestep);
 
 private:
 	std::vector<CelBody*> _bodies;

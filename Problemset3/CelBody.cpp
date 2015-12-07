@@ -7,6 +7,7 @@
 
 #include "CelBody.h"
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
@@ -160,6 +161,39 @@ double CelBody::getY()
 vector<double>* CelBody::getCoords()
 {
 	return &_coords;
+}
+
+/**
+ * Getter method for the energy of the celestial body. For now, this is pure kinetic energy on it's orbit.
+ *
+ * @brief Getter for the energy
+ *
+ * @author Stefan
+ * @date Dec. 7, 2015
+ * @version 0.1
+ *
+ * @return Celestial body's energy [kg / (km/s)**2]
+ */
+double CelBody::getEnergy()
+{
+	return _mass / 2 * pow(_velocity[0],2.0) + pow(_velocity[1],2.0);
+}
+
+/**
+ * Getter method for the angular momentum of the celestial body. For now, this is only for it's orbit.
+ *
+ * @brief Getter for the angular momentum
+ *
+ * @author Stefan
+ * @date Dec. 7, 2015
+ * @version 0.1
+ *
+ * @return Celestial body's angular momentum
+ */
+double CelBody::getAngularMomentum()
+{
+	//TODO implement
+	return 0.0;
 }
 
 /**

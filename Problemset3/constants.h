@@ -15,6 +15,11 @@ extern const double SOLAR_MASS;
 extern const double JUPITER_MASS;
 extern const double EARTH_MASS;
 
+extern const double EARTH_ORBIT_VELOCITY;
+extern const double JUPITER_ORBIT_VELOCITY;
+
 extern const double AU;
+
+extern const double YEAR;
 
 #endif /* CONSTANTS_H_ */

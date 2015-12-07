@@ -32,6 +32,8 @@ public:
 	double getX();
 	double getY();
 	std::vector<double>* getCoords();
+	double getEnergy();
+	double getAngularMomentum();
 
 	void setMass(double mass);
 

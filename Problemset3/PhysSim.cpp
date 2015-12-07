@@ -18,13 +18,22 @@
  */
 PhysSim::PhysSim()
 {
-	// TODO Auto-generated constructor stub
-
+	_bodies = *new std::vector<CelBody*>;
 }
 
+/**
+ * Deletes the PhysSim object, including all celestial bodies, it may contain.
+ *
+ * @author Stefan
+ * @date Dec. 7, 2015
+ * @version 0.2
+ */
 PhysSim::~PhysSim()
 {
-	// TODO maybe delete all contained objects as well?
+	for(CelBody* body : _bodies)
+	{
+		delete body;
+	}
 	delete[] &_bodies;
 }
 
@@ -50,28 +59,28 @@ void PhysSim::addBody(CelBody* body)
  * Solving Newton's equation of motion with the explicit Euler method.
  *
  * @author Stefan
- * @date Dec. 01, 2015
- * @version 0.7
+ * @date Dec. 07, 2015
+ * @version 0.8
+ *
+ * @param timestep The step forward in time to update for
  */
-void PhysSim::update()
+void PhysSim::update(double timestep)
 {
-	double timestep = 0.1337;
 	//calculate net force for each CelBody
 	for (unsigned int i = 0; i < _bodies.size(); i++)
 	{
-		std::vector<double> force =
-		{ 0, 0 };
+		std::vector<double> force = { 0, 0 };
 
 		for (unsigned int j = 0; j < _bodies.size(); j++)
 		{
 			double distanceComponent = 0.0;
-			double distance = std::sqrt(
-					std::pow(_bodies[i]->getX() - _bodies[j]->getX(), 2)
-							+ std::pow(_bodies[i]->getY() - _bodies[j]->getY(),
-									2));
 
 			if (i != j)
 			{
+				double distance = std::sqrt(
+									std::pow(_bodies[i]->getX() - _bodies[j]->getX(), 2)
+											+ std::pow(_bodies[i]->getY() - _bodies[j]->getY(),2));
+
 				distanceComponent = _bodies[i]->getX() - _bodies[j]->getX();
 				force[0] += -GRAV_CONST
 						* (_bodies[j]->getMass() * distanceComponent)

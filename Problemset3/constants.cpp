@@ -33,3 +33,20 @@ const double EARTH_MASS = 5.9726e24; //kg
  * Source: http://www.nature.com/news/the-astronomical-unit-gets-fixed-1.11416
  */
 const double AU = 1.49597870700e8; //km
+
+/**
+ * Earth's mean velocity on a circular approximated orbit
+ * Source: http://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
+ */
+const double EARTH_ORBIT_VELOCITY = 29.78; // km / s
+
+/**
+ * Jupiter's mean velocity on a circular approximated orbit
+ * Source: http://nssdc.gsfc.nasa.gov/planetary/factsheet/jupiterfact.html
+ */
+const double JUPITER_ORBIT_VELOCITY = 13.06; // km / s
+
+/**
+ * Is 365 * 24 * 60 * 60 seconds
+ */
+const double YEAR = 31536000.0;
