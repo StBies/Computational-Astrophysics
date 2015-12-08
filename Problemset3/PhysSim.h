@@ -30,6 +30,7 @@ public:
 
 	void addBody(CelBody* body);
 	void update(double timestep);
+	void updateRK(double timestep);
 
 private:
 	std::vector<CelBody*> _bodies;
