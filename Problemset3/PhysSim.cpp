@@ -81,7 +81,6 @@ void PhysSim::update(double timestep)
 
 			if (i != j)
 			{
-
 				distanceComponent = _bodies[i]->getX() - _bodies[j]->getX();
 				acceleration[0] += -GRAV_CONST
 						* (_bodies[j]->getMass() * distanceComponent)
@@ -91,10 +90,10 @@ void PhysSim::update(double timestep)
 						* (_bodies[j]->getMass() * distanceComponent)
 						/ std::pow(distance, 3.0);
 				ePot += -GRAV_CONST * _bodies[i]->getMass() * _bodies[j]->getMass() / distance;
-
 			}
 		}
 
+		ePot *= 1e6;
 		//update position and velocity
 		if (_bodies[i]->isMovable())
 		{
