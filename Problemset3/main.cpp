@@ -17,17 +17,22 @@ int main()
 	sim->addBody(planet);
 	sim->addBody(planet2);
 
-	double stepsize = YEAR /  365;
+	double stepsize = YEAR / 365;
 	//simulate orbit for 2 years, one day step
+	//print table formatted as:
+	//x_1, y_1, x_2, y_2, t, E_1, E_2, L_1, L_2
 	for(int i = 0; i < 10000 * 365; i++)
 	{
-		sim->updateRK(stepsize);
+		sim->update(stepsize);
 		cout << planet->getX() / AU << "\t"
 			 << planet->getY() / AU << "\t"
 			 << planet2->getX() / AU << "\t"
 			 << planet2->getY() / AU << "\t"
 			 << (double)(i * stepsize) / YEAR << "\t"
-			 << *(planet->getEnergy())
+			 << *(planet->getEnergy()) << "\t"
+			 << *(planet2->getEnergy()) << "\t"
+			 << planet->getAngularMomentum() << "\t"
+			 << planet2->getAngularMomentum()
 			 << endl;
 	}
 

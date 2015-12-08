@@ -154,19 +154,19 @@ void PhysSim::updateRK(double timestep)
 						* (_bodies[j]->getMass() * distanceComponent)
 						/ std::pow(distance, 3.0);
 				acceleration[0] += -GRAV_CONST
-						* (_bodies[j]->getMass() * (distanceComponent + eulerAcceleration[0] / 2))
+						* (_bodies[j]->getMass() * (distanceComponent + (timestep *eulerAcceleration[0]) / 2))
 						/ std::pow(distance, 3.0);
 				distanceComponent = _bodies[i]->getY() - _bodies[j]->getY();
 				eulerAcceleration[1] += -GRAV_CONST
 						* (_bodies[j]->getMass() * distanceComponent)
 						/ std::pow(distance, 3.0);
 				acceleration[1] += -GRAV_CONST
-										* (_bodies[j]->getMass() * (distanceComponent + eulerAcceleration[0] / 2))
+										* (_bodies[j]->getMass() * (distanceComponent + (timestep * eulerAcceleration[0]) / 2))
 										/ std::pow(distance, 3.0);
 				ePot += -GRAV_CONST * _bodies[i]->getMass() * _bodies[j]->getMass() / distance;
-
 			}
 		}
+		ePot *= 1e6;
 
 		//update position and velocity
 		if (_bodies[i]->isMovable())

@@ -39,7 +39,6 @@ CelBody::CelBody(double mass, double x, double y, double velocityX,
 	_velocity[0] = velocityX;
 	_velocity[1] = velocityY;
 	_energy = _mass / 2 * (pow(_velocity[0],2.0) + pow(_velocity[1],2.0));
-	_angularMomentum = 1.337;
 }
 
 CelBody::~CelBody()
@@ -165,7 +164,7 @@ vector<double>* CelBody::getCoords()
 }
 
 /**
- * Getter method for the energy of the celestial body. For now, this is pure kinetic energy on it's orbit.
+ * Getter method for the energy of the celestial body.
  *
  * @brief Getter for the energy
  *
@@ -173,7 +172,7 @@ vector<double>* CelBody::getCoords()
  * @date Dec. 7, 2015
  * @version 0.1
  *
- * @return Celestial body's energy [kg / (km/s)**2]
+ * @return Celestial body's energy [MJ]
  */
 double* CelBody::getEnergy()
 {
@@ -189,12 +188,11 @@ double* CelBody::getEnergy()
  * @date Dec. 7, 2015
  * @version 0.1
  *
- * @return Celestial body's angular momentum
+ * @return Celestial body's angular momentum [kg * km**2 / s]
  */
-double* CelBody::getAngularMomentum()
+double CelBody::getAngularMomentum()
 {
-	//TODO implement
-	return nullptr;
+	return _mass * sqrt((pow(_velocity[0],2.0) + pow(_velocity[1],2.0))) * sqrt(pow(_coords[0],2.0)+pow(_coords[1],2.0));
 }
 
 /**
