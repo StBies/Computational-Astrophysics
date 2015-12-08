@@ -34,7 +34,6 @@ PhysSim::~PhysSim()
 	{
 		delete body;
 	}
-	delete[] &_bodies;
 }
 
 /**
@@ -70,15 +69,18 @@ void PhysSim::update(double timestep)
 	for (unsigned int i = 0; i < _bodies.size(); i++)
 	{
 		std::vector<double> force = { 0, 0 };
+		double ePot = 0.0;
 
 		for (unsigned int j = 0; j < _bodies.size(); j++)
 		{
 			double distanceComponent = 0.0;
 
+			double distance = std::sqrt(std::pow(_bodies[i]->getX() - _bodies[j]->getX(),2)
+							+ std::pow(_bodies[i]->getY() - _bodies[j]->getY(),2));
+
+
 			if (i != j)
 			{
-				double distance = std::sqrt(std::pow(_bodies[i]->getX() - _bodies[j]->getX(),2)
-											+ std::pow(_bodies[i]->getY() - _bodies[j]->getY(),2));
 
 				distanceComponent = _bodies[i]->getX() - _bodies[j]->getX();
 				force[0] += -GRAV_CONST
@@ -88,6 +90,8 @@ void PhysSim::update(double timestep)
 				force[1] += -GRAV_CONST
 						* (_bodies[j]->getMass() * distanceComponent)
 						/ std::pow(distance, 3.0);
+				ePot += -GRAV_CONST * _bodies[i]->getMass() * _bodies[j]->getMass() / distance;
+
 			}
 		}
 
@@ -96,15 +100,21 @@ void PhysSim::update(double timestep)
 		{
 			std::vector<double>* coords;
 			std::vector<double>* velocity;
+			CelBody* body = _bodies[i];
 
-			coords = _bodies[i]->getCoords();
-			velocity = _bodies[i]->getVelocity();
+			coords = body->getCoords();
+			velocity = body->getVelocity();
+
+			double* energy = body->getEnergy();
 
 			for (unsigned int k = 0; k < 2; k++)
 			{
 				(*coords)[k] += timestep * (*velocity)[k];
 				(*velocity)[k] += timestep * force[k];
 			}
+			*energy = ePot
+					+ body->getMass() / 2
+					* (std::pow((*velocity)[0],2.0) + std::pow((*velocity)[1],2.0));
 		}
 	}
 }

@@ -14,4 +14,10 @@ all: $(OBJ)
 	$(CC) $(CFLAGS) -c $<
 
 clean:
-	rm *.out  
+	rm *.out
+
+data:
+	./simul.out > plots/planet.dat
+
+plot:
+	gnuplot plots/plot.plt  
