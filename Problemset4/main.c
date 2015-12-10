@@ -21,6 +21,8 @@ int main(void)
 
 	int N = 1e6;
 	int counter = 0;
+
+	#pragma omp parallel for
 	for(int i = 0; i < N; i++)
 	{
 		x = rand() / (double)RAND_MAX;
