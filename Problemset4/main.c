@@ -23,7 +23,7 @@ int main(void)
 	//arrays to store random numbers for pairs x,y. z array is to store result for parallel computation
 	double x[n];
 	double y[n];
-	double z[n];
+	short z[n];
 
 	//feed the arrays with random numbers. Feeded to arrays in order to get the same results with parallel computation
 	for(int i = 0; i < n; i++)
