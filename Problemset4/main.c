@@ -14,27 +14,39 @@ bool isUnder(double x, double y);
 
 int main(void)
 {
-	double x = 0;
-	double y = 0;
-
+	//seed the random number generator
 	srand(1337);
 
-	int N = 1e6;
-	int counter = 0;
+	//number of random number pairs, if much bigger, heap memory must be allocated -> slower
+	int n = 1e4;
 
-	#pragma omp parallel for
-	for(int i = 0; i < N; i++)
+	//arrays to store random numbers for pairs x,y. z array is to store result for parallel computation
+	double x[n];
+	double y[n];
+	double z[n];
+
+	//feed the arrays with random numbers. Feeded to arrays in order to get the same results with parallel computation
+	for(int i = 0; i < n; i++)
 	{
-		x = rand() / (double)RAND_MAX;
-		y = rand() / (double)RAND_MAX;
-
-		if(isUnder(x,y))
-		{
-			counter++;
-		}
+		x[i] = rand() / (double)RAND_MAX;
+		y[i] = rand() / (double)RAND_MAX;
 	}
 
-	printf("Real integral is about: 0.78540, this calculation: %f\n", (double)counter/N);
+	int counter = 0;
+
+	//check, how many of the points are contributing to the integral
+	#pragma omp parallel for
+	for(int i = 0; i < n; i++)
+	{
+		z[i] = isUnder(x[i],y[i]) ? 1 : 0;
+	}
+
+	for(int i = 0; i < n; i++)
+	{
+		counter += z[i];
+	}
+
+	printf("Real integral is about: 0.78540, this calculation: %f\n", (double)counter/n);
 
 	return 0;
 
