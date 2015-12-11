@@ -25,7 +25,7 @@ int main(void)
 	double y[n];
 	short z[n];
 
-	//feed the arrays with random numbers. Feeded to arrays in order to get the same results with parallel computation
+	//feed the arrays with random numbers. Fed to arrays in order to get the same results with parallel computation
 	for(int i = 0; i < n; i++)
 	{
 		x[i] = rand() / (double)RAND_MAX;
