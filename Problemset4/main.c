@@ -23,7 +23,7 @@ int main(void)
 	//arrays to store random numbers for pairs x,y. z array is to store result for parallel computation
 	double x[n];
 	double y[n];
-	short z[n];
+	char z[n];
 
 	//feed the arrays with random numbers. Fed to arrays in order to get the same results with parallel computation
 	for(int i = 0; i < n; i++)
@@ -49,7 +49,6 @@ int main(void)
 	printf("Real integral is about: 0.78540, this calculation: %f\n", (double)counter/n);
 
 	return 0;
-
 }
 
 /**
