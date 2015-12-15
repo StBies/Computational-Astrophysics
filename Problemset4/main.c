@@ -19,7 +19,7 @@ int main(void)
 
 	generateNumbers(x,n);
 
-	printf("Real integral is about: 0.78540, this calculation: %f\n", integrateAvg(x,n));
+	printf("Real integral is about: 0.78540, this calculation: %f\n", integrateAvg(x,n)->value);
 
 	return 0;
 }
