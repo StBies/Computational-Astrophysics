@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -std=c99 -O3
 LDFLAGS = -lm
 
-OBJ = main.o
+OBJ = main.o mc-integrator.o
 SRC = $(OBJ:%.o=%.c)
 
 all: $(OBJ)

@@ -6,9 +6,6 @@
  */
 
 #include <stdio.h>
-#include <math.h>
-#include <stdlib.h>
-#include <stdbool.h>
 #include "mc-integrator.h"
 
 int main(void)
