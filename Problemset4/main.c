@@ -6,7 +6,6 @@
  */
 
 #include <stdio.h>
-#include <math.h>
 #include "mc-integrator.h"
 
 int main(void)
