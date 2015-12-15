@@ -77,3 +77,16 @@ void generateNumbers(double a[], double b[], int n)
 		b[i] = rand() / (double)RAND_MAX;
 	}
 }
+
+double integrate2(double a[], int n)
+{
+	double functionAverage = 0.0;
+
+	for(int i = 0; i < n; i++)
+	{
+		functionAverage += sqrt(1.0 - pow(a[i],2.0));
+	}
+
+	functionAverage /= n;
+	return functionAverage;
+}

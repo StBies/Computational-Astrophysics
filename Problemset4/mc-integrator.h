@@ -13,5 +13,6 @@
 bool isUnder(double x, double y);
 double integrate(double a[], double b[], int n);
 void generateNumbers(double a[], double b[], int n);
+double integrate2(double a[], int n);
 
 #endif /* MC_INTEGRATOR_H_ */
