@@ -90,6 +90,7 @@ void generateNumbers(double a[], int n)
 
 Solution* integrateAvg(double a[], int n)
 {
+	//TODO calculate and store error as well
 	double functionValue[n];
 	double functionAverage = 0.0;
 
@@ -106,8 +107,9 @@ Solution* integrateAvg(double a[], int n)
 
 	functionAverage /= n;
 
-	//allocating dynamic memory for s and returning that does not work for some reason
-	Solution* s = malloc(sizeof(Solution));
+
+	//allocating dynamic memory for s
+	Solution* s = (Solution*)malloc(sizeof(Solution));
 	s->value = functionAverage;
 	return s;
 }

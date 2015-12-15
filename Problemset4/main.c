@@ -10,7 +10,7 @@
 
 int main(void)
 {
-	//number of random number pairs, if much bigger, heap memory must be allocated -> slower
+	//number of random numbers, if much bigger, heap memory must be allocated -> slower
 	int n = 5e5;
 
 	//arrays to store random numbers for pairs x,y. z array is to store result for parallel computation
