@@ -10,16 +10,16 @@
 
 #include <stdbool.h>
 
-bool isUnder(double x, double y);
-double integrateRain(double a[], double b[], int n);
-void generateNumbers(double a[], int n);
-void generateNumberPairs(double a[], double b[], int n);
-double integrateAvg(double a[], int n);
-
 typedef struct
 {
 	double value;
 	double error;
 } Solution;
+
+bool isUnder(double x, double y);
+double integrateRain(double a[], double b[], int n);
+void generateNumbers(double a[], int n);
+void generateNumberPairs(double a[], double b[], int n);
+double integrateAvg(double a[], int n);
 
 #endif /* MC_INTEGRATOR_H_ */

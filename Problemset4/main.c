@@ -17,8 +17,6 @@ int main(void)
 	double x[n];
 //	double y[n];
 
-	Solution sol;
-
 	generateNumbers(x,n);
 
 	printf("Real integral is about: 0.78540, this calculation: %f\n", integrateAvg(x,n));

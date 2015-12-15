@@ -90,8 +90,11 @@ void generateNumbers(double a[], int n)
 
 double integrateAvg(double a[], int n)
 {
+	//allocating dynamic memory for s and returning that does not work for some reason
+//	Solution* s = (Solution*)malloc(sizeof(Solution));
 	double functionValue[n];
 	double functionAverage = 0.0;
+//	s->value = 0.0;
 
 	#pragma omp parallel for
 	for (int i = 0; i < n; i++)
@@ -105,6 +108,9 @@ double integrateAvg(double a[], int n)
 	}
 
 	functionAverage /= n;
+
+//	s->value = functionAverage;
+//	s->error = 1.337;
 
 	return functionAverage;
 }
