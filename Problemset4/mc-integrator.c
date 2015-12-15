@@ -16,7 +16,7 @@
  */
 bool isUnder(double x, double y)
 {
-	return y <= sqrt(1.0 - pow(x,2.0));
+	return y <= sqrt(1.0 - pow(x, 2.0));
 }
 
 /**
@@ -34,24 +34,24 @@ bool isUnder(double x, double y)
  *
  * @return Result of the integration as double precision floating point number
  */
-double integrate(double a[], double b[], int n)
+double integrateRain(double a[], double b[], int n)
 {
 	char z[n];
 	int counter = 0;
 
 	//check, how many of the points are contributing to the integral
 	#pragma omp parallel for
-	for(int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 	{
-		z[i] = isUnder(a[i],b[i]) ? 1 : 0;
+		z[i] = isUnder(a[i], b[i]) ? 1 : 0;
 	}
 
-	for(int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 	{
 		counter += z[i];
 	}
 
-	return (double)counter/n;
+	return (double) counter / n;
 }
 
 /**
@@ -65,28 +65,46 @@ double integrate(double a[], double b[], int n)
  * @param b array of double precision random numbers of size n
  * @param n number of random numbers, array sizes a and b must be n
  */
-void generateNumbers(double a[], double b[], int n)
+void generateNumberPairs(double a[], double b[], int n)
 {
 	//seed the random number generator
 	srand(1337);
 
 	//feed the arrays with random numbers. Fed to arrays in order to get the same results with parallel computation
-	for(int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 	{
-		a[i] = rand() / (double)RAND_MAX;
-		b[i] = rand() / (double)RAND_MAX;
+		a[i] = rand() / (double) RAND_MAX;
+		b[i] = rand() / (double) RAND_MAX;
 	}
 }
 
-double integrate2(double a[], int n)
+void generateNumbers(double a[], int n)
 {
+	srand(1337);
+
+	for (int i = 0; i < n; i++)
+	{
+		a[i] = rand() / (double) RAND_MAX;
+	}
+}
+
+double integrateAvg(double a[], int n)
+{
+	double functionValue[n];
 	double functionAverage = 0.0;
 
-	for(int i = 0; i < n; i++)
+	#pragma omp parallel for
+	for (int i = 0; i < n; i++)
 	{
-		functionAverage += sqrt(1.0 - pow(a[i],2.0));
+		functionValue[i] += sqrt(1.0 - pow(a[i], 2.0));
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		functionAverage += functionValue[i];
 	}
 
 	functionAverage /= n;
+
 	return functionAverage;
 }
