@@ -65,6 +65,7 @@ void PhysSim::addBody(CelBody* body)
  */
 void PhysSim::update(double timestep)
 {
+	//TODO update with old values of planets instead of already updated
 	//calculate net acceleration for each CelBody
 	for (unsigned int i = 0; i < _bodies.size(); i++)
 	{
@@ -130,6 +131,8 @@ void PhysSim::update(double timestep)
  */
 void PhysSim::updateRK(double timestep)
 {
+	//TODO probably doesn't work as intended
+	//TODO update with old values of planets instead of already updated
 	//calculate net acceleration for each CelBody
 	for (unsigned int i = 0; i < _bodies.size(); i++)
 	{
