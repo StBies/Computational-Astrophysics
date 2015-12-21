@@ -91,25 +91,33 @@ void generateNumbers(double a[], int n)
 Solution* integrateAvg(double a[], int n)
 {
 	//TODO calculate and store error as well
-	double functionValue[n];
+	double* functionValue = (double*)malloc(n * sizeof(double));
+	double* squaredValue = (double*)malloc(n * sizeof(double));
 	double functionAverage = 0.0;
+	double error = 0;
 
 	#pragma omp parallel for
 	for (int i = 0; i < n; i++)
 	{
-		functionValue[i] += sqrt(1.0 - pow(a[i], 2.0));
+		functionValue[i] = sqrt(1.0 - pow(a[i], 2.0));
+		squaredValue[i] = 1.0 - pow(a[i],2);
 	}
 
 	for (int i = 0; i < n; i++)
 	{
 		functionAverage += functionValue[i];
+		error += squaredValue[i];
 	}
+	free(functionValue);
+	free(squaredValue);
 
 	functionAverage /= n;
-
+	error /= n;
+	error = sqrt((error - pow(functionAverage,2.0))/n);
 
 	//allocating dynamic memory for s
 	Solution* s = (Solution*)malloc(sizeof(Solution));
 	s->value = functionAverage;
+	s->error = error;
 	return s;
 }
