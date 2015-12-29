@@ -10,4 +10,7 @@ set yrange [0:1]
 set zrange [0:1]
 splot './randomnumbers.txt' using 1:2:3 title 'random numbers'
 set output
+set terminal wxt
+replot
+pause -1
 
