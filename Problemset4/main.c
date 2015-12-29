@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include "mc-integrator.h"
 #include <stdlib.h>
+#include "randomtest.h"
 
 int main(void)
 {
@@ -23,5 +24,6 @@ int main(void)
 	printf("Real integral is about: 0.78540, this calculation: %f\n", integrateAvg(x,n)->value);
 
 	free(x);
+	testAnsiRand();
 	return 0;
 }

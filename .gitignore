@@ -41,3 +41,5 @@ Problemset2/solution
 #UML
 Problemset*/UML/*.html
 
+#Results
+Problemset*/*.txt

@@ -14,5 +14,8 @@ omp:
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
 
+plot:
+	gnuplot plots/plotscript.plt
+
 clean:
 	rm *.out
