@@ -10,7 +10,8 @@ all: $(OBJ)
 	rm *.o
 omp:
 	$(CC) $(CFLAGS) -fopenmp $(SRC) -o omp.out $(LDFLAGS) -fopenmp 
-
+gsl:
+	$(CC) $(CFLAGS) -D gsl $(SRC) -o gsl.out $(LDFLAGS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
 

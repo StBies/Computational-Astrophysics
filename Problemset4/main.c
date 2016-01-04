@@ -9,7 +9,10 @@
 #include "mc-integrator.h"
 #include <stdlib.h>
 #include "randomtest.h"
+
+#ifdef gsl
 #include <gsl/gsl_rng.h>
+#endif
 
 int main(void)
 {

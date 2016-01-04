@@ -20,6 +20,7 @@ Problemset*/obj
 Problemset*/bin
 Problemset*/Debug
 Problemset*/Release
+Problemset*/*.out
 
 #Data for Set1/Exercise1
 Problemset*/Exercise*/*.dat
