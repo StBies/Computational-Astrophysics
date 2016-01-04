@@ -17,7 +17,7 @@ typedef struct
 } Solution;
 
 bool isUnder(double x, double y);
-double integrateRain(double a[], double b[], int n);
+double integrateRejection(double a[], double b[], int n);
 void generateNumbers(double a[], int n);
 void generateNumberPairs(double a[], double b[], int n);
 Solution* integrateSimpleOMP(double a[], int n);

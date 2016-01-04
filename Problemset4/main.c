@@ -28,6 +28,8 @@ int main(void)
 	printf("Real integral is about: 0.78540, this calculation: %f\n", integrateSimpleOMP(x,n)->value);
 
 	free(x);
+#ifdef randomtest
 	testAnsiRand();
+#endif
 	return 0;
 }

@@ -34,7 +34,7 @@ bool isUnder(double x, double y)
  *
  * @return Result of the integration as double precision floating point number
  */
-double integrateRain(double a[], double b[], int n)
+double integrateRejection(double a[], double b[], int n)
 {
 	char z[n];
 	int counter = 0;

@@ -3,7 +3,7 @@
 
 void testAnsiRand()
 {
-	unsigned int number = 1e3;
+	unsigned int number = 1e4;
 	srand(42);
 
 	FILE* saveFile = fopen("./ANSI_random.txt","w+");
