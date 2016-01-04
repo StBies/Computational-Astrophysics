@@ -9,6 +9,7 @@
 #include "mc-integrator.h"
 #include <stdlib.h>
 #include "randomtest.h"
+#include <gsl/gsl_rng.h>
 
 int main(void)
 {
@@ -21,7 +22,7 @@ int main(void)
 
 	generateNumbers(x,n);
 
-	printf("Real integral is about: 0.78540, this calculation: %f\n", integrateAvg(x,n)->value);
+	printf("Real integral is about: 0.78540, this calculation: %f\n", integrateSimpleOMP(x,n)->value);
 
 	free(x);
 	testAnsiRand();

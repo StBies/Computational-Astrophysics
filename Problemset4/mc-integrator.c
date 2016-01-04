@@ -20,7 +20,7 @@ bool isUnder(double x, double y)
 }
 
 /**
- * Monte-Carlo-integration of \f$\int_{0}^{1}\sqrt(1-x^{2})dx\f$
+ * Monte-Carlo-integration of \f$\int_{0}^{1}\sqrt(1-x^{2})dx\f$ using the rejection method.
  *
  * @author Stefan
  * @date Dec. 15, 2015
@@ -88,9 +88,19 @@ void generateNumbers(double a[], int n)
 	}
 }
 
-Solution* integrateAvg(double a[], int n)
+/**
+ * Monte Carlo Integration of the function \f$ \sqrt(1-x^{2}) \f$ in the interval [0,1).
+ *
+ * @author Stefan
+ * @date Jan. 04, 2016
+ * @version 0.1
+ *
+ * @return pointer of Solution type containing double precision value and error of the integration.
+ *
+ * @warn Can be executed with openMP parallelization, but is memory-expensive.
+ */
+Solution* integrateSimpleOMP(double a[], int n)
 {
-	//TODO calculate and store error as well
 	double* functionValue = (double*)malloc(n * sizeof(double));
 	double* squaredValue = (double*)malloc(n * sizeof(double));
 	double functionAverage = 0.0;
@@ -110,6 +120,42 @@ Solution* integrateAvg(double a[], int n)
 	}
 	free(functionValue);
 	free(squaredValue);
+
+	functionAverage /= n;
+	error /= n;
+	error = sqrt((error - pow(functionAverage,2.0))/n);
+
+	//allocating dynamic memory for s
+	Solution* s = (Solution*)malloc(sizeof(Solution));
+	s->value = functionAverage;
+	s->error = error;
+	return s;
+}
+
+/**
+ * Monte Carlo Integration of the function \f$ \sqrt(1-x^{2}) \f$ in the interval [0,1).
+ *
+ * @author Stefan
+ * @date Jan. 04, 2016
+ * @version 0.1
+ *
+ * @return pointer of Solution type containing double precision value and error of the integration.
+ *
+ * @warn Cannot be run in parallel.
+ */
+Solution* integrateSimple(int n, int seed)
+{
+	srand(seed);
+	double functionAverage = 0.0;
+	double error = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		double value = rand()/(double)RAND_MAX;
+		functionAverage += sqrt(1.0 - pow(value, 2.0));
+		error += 1.0 - pow(value,2);
+	}
+
 
 	functionAverage /= n;
 	error /= n;
