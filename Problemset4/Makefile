@@ -18,7 +18,7 @@ omp:
 gsl:
 	$(CC) $(CFLAGS) -D gsl $(SRC) -L/usr/include/ -lgsl -lgslcblas $(LDFLAGS) -o gsl.out
 ompgsl:
-	$(CC) $(CFLAGS) -fopenmp $(SRC) -o ompgsl.out $(LDFLAGS) -fopenmp -lgsl -lgslcblas
+	$(CC) $(CFLAGS) -D gsl -fopenmp $(SRC) -o ompgsl.out $(LDFLAGS) -fopenmp -lgsl -lgslcblas
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
 

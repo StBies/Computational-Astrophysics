@@ -26,7 +26,7 @@ int main(int argc, char** argv)
 	//if program is called from commandline with argument ./*.out -r or ./*.out r results will be printed to files
 	if (argc > 1 && (argv[1][0] == 'r' || argv[1][1] == 'r'))
 	{
-		FILE* saveFile = fopen("./convergence_simple_ANSI.dat", "w+");
+		FILE* saveFile = fopen("./convergenceSimple.dat", "w+");
 		for (int i = 0; i < 1e6; i += 1000)
 		{
 			Solution* s = integrateSimpleOMP(x, i);
