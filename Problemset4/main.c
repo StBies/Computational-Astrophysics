@@ -19,7 +19,7 @@ int main(int argc, char** argv)
 	double* x = (double*) malloc(n * sizeof(double));
 //	double* y = (double*) malloc(n * sizeof(double));
 
-	generateNumbersSobol(x, n);
+	generateNumbers(x, n);
 //	generateNumberPairs(x,y,n);
 
 	Solution* sol = integrateSimple(n,42);
