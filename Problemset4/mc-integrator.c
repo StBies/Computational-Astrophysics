@@ -5,6 +5,7 @@
 
 #ifdef gsl
 #include <gsl/gsl_rng.h>
+#include <gsl/gsl_qrng.h>
 #endif
 
 /**
@@ -207,3 +208,16 @@ Solution* integrateSimple(int n, int seed)
 	s->error = error;
 	return s;
 }
+
+#ifdef gsl
+void generateNumbersSobol(double a[], int n)
+{
+	gsl_qrng *generator = gsl_qrng_alloc(gsl_qrng_sobol,1);
+	for(int i = 0; i < n; i++)
+	{
+		double value[1];
+		gsl_qrng_get(generator,value);
+		a[i] = value[0];
+	}
+}
+#endif

@@ -13,10 +13,19 @@ set output
 set terminal png size 720,640
 set output './plots/convergence.png'
 set xlabel 'Number of draws'
-set ylabel 'Integral [a.u.]'
+set ylabel 'Integral'
 set title 'Convergence of the MC integral'
 set grid
 set autoscale
 plot './convergenceSimple.dat' using 1:2 title 'convergence',pi/4 t 'Pi/4'
+set output
+set terminal png size 720,640
+set output './plots/errors.png'
+set xlabel 'Number of draws'
+set ylabel 'Error'
+set title 'Errors of the MC integral'
+set grid
+set autoscale
+plot './convergenceSimple.dat' using 1:3 title 'Errors'
 set output
 

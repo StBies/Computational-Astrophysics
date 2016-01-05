@@ -22,5 +22,7 @@ void generateNumbers(double a[], int n);
 void generateNumberPairs(double a[], double b[], int n);
 Solution* integrateSimpleOMP(double a[], int n);
 Solution* integrateSimple(int n,int seed);
-
+#ifdef gsl
+void generateNumbersSobol(double a[], int n);
+#endif
 #endif /* MC_INTEGRATOR_H_ */

@@ -19,9 +19,12 @@ int main(int argc, char** argv)
 	double* x = (double*) malloc(n * sizeof(double));
 //	double* y = (double*) malloc(n * sizeof(double));
 
-	generateNumbers(x, n);
+	generateNumbersSobol(x, n);
+//	generateNumberPairs(x,y,n);
 
-	printf("Real integral is about: 0.78540, this calculation: %f\n",integrateSimple(n, 42)->value);
+	Solution* sol = integrateSimple(n,42);
+	printf("Real integral is about: 0.78540, this calculation: %f +- %f\n",sol->value,sol->error);
+	free(sol);
 
 	//if program is called from commandline with argument ./*.out -r or ./*.out r results will be printed to files
 	if (argc > 1 && (argv[1][0] == 'r' || argv[1][1] == 'r'))
