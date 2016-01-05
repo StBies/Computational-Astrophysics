@@ -8,30 +8,36 @@
 #include <stdio.h>
 #include "mc-integrator.h"
 #include <stdlib.h>
-#ifdef result
 #include "randomtest.h"
-#endif
 
-#ifdef gsl
-#include <gsl/gsl_rng.h>
-#endif
-
-int main(void)
+int main(int argc, char** argv)
 {
-	//number of random numbers, if much bigger, heap memory must be allocated -> slower
+	//number of random numbers
 	int n = 3e7;
 
 	//arrays to store random numbers for pairs x,y. z array is to store result for parallel computation
-	double* x = (double*)malloc(n * sizeof(double));
-//	double y[n];
+	double* x = (double*) malloc(n * sizeof(double));
+//	double* y = (double*) malloc(n * sizeof(double));
 
-	generateNumbers(x,n);
+	generateNumbers(x, n);
 
-	printf("Real integral is about: 0.78540, this calculation: %f\n", integrateSimpleOMP(x,n)->value);
+	printf("Real integral is about: 0.78540, this calculation: %f\n",integrateSimple(n, 42)->value);
 
+	//if program is called from commandline with argument ./*.out -r or ./*.out r results will be printed to files
+	if (argc > 1 && (argv[1][0] == 'r' || argv[1][1] == 'r'))
+	{
+		FILE* saveFile = fopen("./convergence_simple_ANSI.dat", "w+");
+		for (int i = 0; i < 1e6; i += 1000)
+		{
+			Solution* s = integrateSimpleOMP(x, i);
+			fprintf(saveFile, "%d\t%f\n", i, s->value);
+			free(s);
+		}
+		fclose(saveFile);
+		testAnsiRand();
+	}
 	free(x);
-	#ifdef result
-	testAnsiRand();
-	#endif
+//	free(y);
+
 	return 0;
 }

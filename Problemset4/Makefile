@@ -15,7 +15,7 @@ prog: $(OBJ)
 omp:
 	$(CC) $(CFLAGS) -fopenmp $(SRC) -o omp.out $(LDFLAGS) -fopenmp 
 gsl:
-	$(CC) $(CFLAGS) -D gsl $(SRC) -o gsl.out -lgsl -lgslcblas $(LDFLAGS)
+	$(CC) $(CFLAGS) -D gsl $(SRC) -L/usr/include/ -lgsl -lgslcblas $(LDFLAGS) -o gsl.out
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
 
@@ -24,3 +24,5 @@ plot:
 
 clean:
 	rm *.out
+test:
+	$(CC) $(CFLAGS) -D VAR -fopenmp $(SRC) -o omp.out $(LDFLAGS) -fopenmp

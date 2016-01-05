@@ -1,6 +1,7 @@
-#include "mc-integrator.h"
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include "mc-integrator.h"
 
 #ifdef gsl
 #include <gsl/gsl_rng.h>
@@ -71,6 +72,21 @@ double integrateRejection(double a[], double b[], int n)
  */
 void generateNumberPairs(double a[], double b[], int n)
 {
+#ifdef gsl
+	//Following https://www.gnu.org/software/gsl/manual/html_node/Random-Number-Generator-Examples.html#Random-Number-Generator-Examples
+	const gsl_rng_type* T;
+	gsl_rng* generator;
+	T = gsl_rng_default;
+	generator = gsl_rng_alloc(T);
+	gsl_rng_env_setup();
+
+	for (int i = 0; i < n; i++)
+	{
+		a[i] = gsl_rng_uniform(generator);
+		b[i] = gsl_rng_uniform(generator);
+	}
+	gsl_rng_free (generator);
+#else
 	//seed the random number generator
 	srand(42);
 
@@ -80,32 +96,34 @@ void generateNumberPairs(double a[], double b[], int n)
 		a[i] = rand() / (double) RAND_MAX;
 		b[i] = rand() / (double) RAND_MAX;
 	}
+#endif
 }
 
 void generateNumbers(double a[], int n)
 {
-	#ifndef gsl
+#ifndef gsl
 	srand(42);
 
 	for (int i = 0; i < n; i++)
 	{
 		a[i] = rand() / (double) RAND_MAX;
 	}
-	#endif
+#endif
 
-	#ifdef gsl
+#ifdef gsl
+	//Following https://www.gnu.org/software/gsl/manual/html_node/Random-Number-Generator-Examples.html#Random-Number-Generator-Examples
 	const gsl_rng_type* T;
-	gsl_rng* r;
+	gsl_rng* generator;
 	T = gsl_rng_default;
-	r = gsl_rng_alloc(T);
+	generator = gsl_rng_alloc(T);
+	gsl_rng_env_setup();
 
-	GSL_RNG_SEED = 42;
-	GSL_RNG_TYPE = gsl_rng_knuthran2002;
 	for (int i = 0; i < n; i++)
 	{
-		a[i] = 1;
+		a[i] = gsl_rng_uniform(generator);
 	}
-	#endif
+	gsl_rng_free (generator);
+#endif
 }
 
 /**
@@ -121,8 +139,8 @@ void generateNumbers(double a[], int n)
  */
 Solution* integrateSimpleOMP(double a[], int n)
 {
-	double* functionValue = (double*)malloc(n * sizeof(double));
-	double* squaredValue = (double*)malloc(n * sizeof(double));
+	double* functionValue = (double*) malloc(n * sizeof(double));
+	double* squaredValue = (double*) malloc(n * sizeof(double));
 	double functionAverage = 0.0;
 	double error = 0;
 
@@ -130,7 +148,7 @@ Solution* integrateSimpleOMP(double a[], int n)
 	for (int i = 0; i < n; i++)
 	{
 		functionValue[i] = sqrt(1.0 - pow(a[i], 2.0));
-		squaredValue[i] = 1.0 - pow(a[i],2);
+		squaredValue[i] = 1.0 - pow(a[i], 2);
 	}
 
 	for (int i = 0; i < n; i++)
@@ -143,10 +161,10 @@ Solution* integrateSimpleOMP(double a[], int n)
 
 	functionAverage /= n;
 	error /= n;
-	error = sqrt((error - pow(functionAverage,2.0))/n);
+	error = sqrt((error - pow(functionAverage, 2.0)) / n);
 
 	//allocating dynamic memory for s
-	Solution* s = (Solution*)malloc(sizeof(Solution));
+	Solution* s = (Solution*) malloc(sizeof(Solution));
 	s->value = functionAverage;
 	s->error = error;
 	return s;
@@ -166,23 +184,25 @@ Solution* integrateSimpleOMP(double a[], int n)
 Solution* integrateSimple(int n, int seed)
 {
 	srand(seed);
+
 	double functionAverage = 0.0;
 	double error = 0;
 
+
 	for (int i = 0; i < n; i++)
 	{
-		double value = rand()/(double)RAND_MAX;
+		double value = rand() / (double) RAND_MAX;
 		functionAverage += sqrt(1.0 - pow(value, 2.0));
-		error += 1.0 - pow(value,2);
+		error += 1.0 - pow(value, 2);
 	}
 
 
 	functionAverage /= n;
 	error /= n;
-	error = sqrt((error - pow(functionAverage,2.0))/n);
+	error = sqrt((error - pow(functionAverage, 2.0)) / n);
 
 	//allocating dynamic memory for s
-	Solution* s = (Solution*)malloc(sizeof(Solution));
+	Solution* s = (Solution*) malloc(sizeof(Solution));
 	s->value = functionAverage;
 	s->error = error;
 	return s;
