@@ -9,6 +9,7 @@ all: $(OBJ)
 	make prog
 	make omp
 	make gsl
+	make ompgsl
 prog: $(OBJ)
 	$(CC) $(OBJ) -o run.out $(LDFLAGS)
 	rm *.o
@@ -16,6 +17,8 @@ omp:
 	$(CC) $(CFLAGS) -fopenmp $(SRC) -o omp.out $(LDFLAGS) -fopenmp 
 gsl:
 	$(CC) $(CFLAGS) -D gsl $(SRC) -L/usr/include/ -lgsl -lgslcblas $(LDFLAGS) -o gsl.out
+ompgsl:
+	$(CC) $(CFLAGS) -fopenmp $(SRC) -o ompgsl.out $(LDFLAGS) -fopenmp -lgsl -lgslcblas
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
 
@@ -24,5 +27,3 @@ plot:
 
 clean:
 	rm *.out
-test:
-	$(CC) $(CFLAGS) -D VAR -fopenmp $(SRC) -o omp.out $(LDFLAGS) -fopenmp

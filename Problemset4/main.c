@@ -30,7 +30,7 @@ int main(int argc, char** argv)
 		for (int i = 0; i < 1e6; i += 1000)
 		{
 			Solution* s = integrateSimpleOMP(x, i);
-			fprintf(saveFile, "%d\t%f\n", i, s->value);
+			fprintf(saveFile, "%d\t%f\t%f\n", i, s->value,s->error);
 			free(s);
 		}
 		fclose(saveFile);
