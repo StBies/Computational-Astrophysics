@@ -6,6 +6,10 @@ OBJ = main.o mc-integrator.o
 SRC = $(OBJ:%.o=%.c)
 
 all: $(OBJ)
+	make prog
+	make omp
+	make gsl
+prog: $(OBJ)
 	$(CC) $(OBJ) -o run.out $(LDFLAGS)
 	rm *.o
 omp:
