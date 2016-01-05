@@ -15,7 +15,7 @@ prog: $(OBJ)
 omp:
 	$(CC) $(CFLAGS) -fopenmp $(SRC) -o omp.out $(LDFLAGS) -fopenmp 
 gsl:
-	$(CC) $(CFLAGS) -D gsl $(SRC) -o gsl.out $(LDFLAGS)
+	$(CC) $(CFLAGS) -D gsl $(SRC) -o gsl.out -lgsl -lgslcblas $(LDFLAGS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
 

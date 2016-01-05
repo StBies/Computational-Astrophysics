@@ -2,6 +2,10 @@
 #include <math.h>
 #include <stdlib.h>
 
+#ifdef gsl
+#include <gsl/gsl_rng.h>
+#endif
+
 /**
  * Checks, if the value y is smaller than the value of the function sqrt(1-x**2) at point x
  *
@@ -68,7 +72,7 @@ double integrateRejection(double a[], double b[], int n)
 void generateNumberPairs(double a[], double b[], int n)
 {
 	//seed the random number generator
-	srand(1337);
+	srand(42);
 
 	//feed the arrays with random numbers. Fed to arrays in order to get the same results with parallel computation
 	for (int i = 0; i < n; i++)
@@ -80,12 +84,28 @@ void generateNumberPairs(double a[], double b[], int n)
 
 void generateNumbers(double a[], int n)
 {
-	srand(1337);
+	#ifndef gsl
+	srand(42);
 
 	for (int i = 0; i < n; i++)
 	{
 		a[i] = rand() / (double) RAND_MAX;
 	}
+	#endif
+
+	#ifdef gsl
+	const gsl_rng_type* T;
+	gsl_rng* r;
+	T = gsl_rng_default;
+	r = gsl_rng_alloc(T);
+
+	GSL_RNG_SEED = 42;
+	GSL_RNG_TYPE = gsl_rng_knuthran2002;
+	for (int i = 0; i < n; i++)
+	{
+		a[i] = 1;
+	}
+	#endif
 }
 
 /**

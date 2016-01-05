@@ -32,7 +32,10 @@
 							</tool>
 							<tool commandLinePattern="${COMMAND}  ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}${FLAGS}" id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.1312524127" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug">
 								<option id="gnu.c.link.option.ldflags.1037817695" name="Linker flags" superClass="gnu.c.link.option.ldflags" value="-lm" valueType="string"/>
-								<option id="gnu.c.link.option.other.866312738" name="Other options (-Xlinker [option])" superClass="gnu.c.link.option.other" valueType="stringList"/>
+								<option id="gnu.c.link.option.other.866312738" name="Other options (-Xlinker [option])" superClass="gnu.c.link.option.other"/>
+								<option id="gnu.c.link.option.paths.1399411566" superClass="gnu.c.link.option.paths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="/usr/include/"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.282970398" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -79,7 +82,7 @@
 							</tool>
 							<tool commandLinePattern="${COMMAND}  ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}${FLAGS}" id="cdt.managedbuild.tool.gnu.c.linker.exe.release.1759900295" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.release">
 								<option id="gnu.c.link.option.ldflags.2020355479" name="Linker flags" superClass="gnu.c.link.option.ldflags" value="-lm" valueType="string"/>
-								<option id="gnu.c.link.option.other.349031882" name="Other options (-Xlinker [option])" superClass="gnu.c.link.option.other" valueType="stringList"/>
+								<option id="gnu.c.link.option.other.349031882" name="Other options (-Xlinker [option])" superClass="gnu.c.link.option.other"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.485903999" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
