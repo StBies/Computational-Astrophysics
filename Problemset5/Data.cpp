@@ -66,7 +66,7 @@ Data::~Data()
 void Data::parseLine()
 {
 	//regular expression for more than one digit, maybe a dot and maybe some more digits
-	regex number("(\\d)+\\.(?\\d*)");
+	regex number("(\\d+)\\.(?\\d*)");
 	smatch submatch;
 
 	for(string line: *_rawData)
