@@ -1,8 +1,8 @@
 CC = g++
 CFLAGS = -O3 -std=c++11
-LDFLAGS = -lm
+LDFLAGS = -lm -lgsl -lgslcblas
 
-OBJ = main.o Data.o
+OBJ = main.o Data.o Processor.o
 
 prog: $(OBJ)
 	$(CC) $(OBJ) -o run.out $(LDFLAGS)
