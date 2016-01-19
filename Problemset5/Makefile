@@ -8,4 +8,6 @@ prog: $(OBJ)
 	$(CC) $(OBJ) -o run.out $(LDFLAGS)
 	rm *.o
 %.o: %.cpp
-	$(CC) $(CFLAGS) -c $< 
+	$(CC) $(CFLAGS) -c $<
+clean:
+	rm *.out 
